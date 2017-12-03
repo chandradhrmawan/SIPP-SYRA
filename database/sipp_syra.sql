@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 26 Nov 2017 pada 11.42
+-- Generation Time: 03 Des 2017 pada 10.17
 -- Versi Server: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -43,7 +43,8 @@ INSERT INTO `detail_pemesanan` (`id_detail`, `id_pemesanan`, `id_barang`, `jumla
 (6, 'PN001251117', '3', 5, '55615'),
 (7, 'PN002251117', '2', 2, '200000'),
 (8, 'PN002251117', '3', 4, '44492'),
-(9, 'PN002251117', '1', 10, '5000000');
+(9, 'PN002251117', '1', 10, '5000000'),
+(1, 'PN003031217', '4', 1, '3000000');
 
 -- --------------------------------------------------------
 
@@ -56,22 +57,35 @@ CREATE TABLE IF NOT EXISTS `detail_penjualan` (
   `id_transaksi` varchar(255) DEFAULT NULL,
   `id_barang` varchar(255) DEFAULT NULL,
   `jumlah_beli` int(11) DEFAULT NULL,
-  `sub_total` varchar(255) DEFAULT NULL
+  `sub_total` varchar(255) DEFAULT NULL,
+  `nama_pelanggan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `detail_penjualan`
 --
 
-INSERT INTO `detail_penjualan` (`id_detail`, `id_transaksi`, `id_barang`, `jumlah_beli`, `sub_total`) VALUES
-(4, 'TR002251117', '1', 1, '100000'),
-(6, 'TR002251117', '2', 3, '150000'),
-(7, 'TR002251117', '2', 2, '100000'),
-(8, 'TR003251117', '1', 2, '200000'),
-(9, 'TR003251117', '2', 1, '50000'),
-(10, 'TR004251117', '2', 2, '100000'),
-(11, 'TR004251117', '2', 2, '100000'),
-(14, 'TR005251117', '2', 2, '100000');
+INSERT INTO `detail_penjualan` (`id_detail`, `id_transaksi`, `id_barang`, `jumlah_beli`, `sub_total`, `nama_pelanggan`) VALUES
+(4, 'TR002251117', '1', 1, '100000', NULL),
+(6, 'TR002251117', '2', 3, '150000', NULL),
+(7, 'TR002251117', '2', 2, '100000', NULL),
+(8, 'TR003251117', '1', 2, '200000', NULL),
+(9, 'TR003251117', '2', 1, '50000', NULL),
+(10, 'TR004251117', '2', 2, '100000', NULL),
+(11, 'TR004251117', '2', 2, '100000', NULL),
+(14, 'TR005251117', '2', 2, '100000', NULL),
+(1, 'TR006271117', '2', 10, '500000', NULL),
+(2, 'TR008031217', '1', 2, '200000', NULL),
+(3, 'TR009031217', '2', 2, '100000', NULL),
+(4, 'TR009031217', '4', 3, '4500000', NULL),
+(5, 'TR009031217', '3', 1, '2323', NULL),
+(6, 'TR010031217', '1', 5, '500000', 'Hendra'),
+(8, 'TR010031217', '2', 3, '150000', 'Hendra'),
+(12, 'TR011031217', '1', 3, '300000', 'Astri'),
+(13, 'TR011031217', '3', 1, '2323', 'Astri'),
+(14, 'TR011031217', '2', 1, '50000', 'Astri'),
+(15, 'TR012031217', '2', 2, '100000', 'Bagus'),
+(16, 'TR013031217', '2', 2, '100000', 'Arum');
 
 -- --------------------------------------------------------
 
@@ -96,10 +110,10 @@ CREATE TABLE IF NOT EXISTS `m_barang` (
 --
 
 INSERT INTO `m_barang` (`id_barang`, `nama_barang`, `id_kategori`, `id_warna`, `stok`, `keterangan`, `harga_jual`, `harga_beli`, `direktori`) VALUES
-('1', 'Hijab Syari', 1, 1, '20', 'Kerudung Syari', '100000', '500000', '-'),
-('2', 'kerudung As', 1, 1, '144', 'Isi Deskripsi Barang', '50000', '100000', 'B00002.jpg'),
-('3', 'kerudung rabani', 3, 1, '1247', 'Isi Deskripsi Barang', '2323', '11123', 'P006.jpg'),
-('4', 'Kerudung Segiempat', 1, 1, '150', 'Isi Deskripsi Barang', '1500000', '3000000', 'P007.jpg');
+('1', 'Hijab Syari', 1, 1, '10', 'Kerudung Syari', '100000', '500000', '-'),
+('2', 'kerudung As', 1, 1, '122', 'Isi Deskripsi Barang', '50000', '100000', 'B00002.jpg'),
+('3', 'kerudung rabani', 3, 1, '1245', 'Isi Deskripsi Barang', '2323', '11123', 'P006.jpg'),
+('4', 'Kerudung Segiempat', 1, 1, '148', 'Isi Deskripsi Barang', '1500000', '3000000', 'P007.jpg');
 
 -- --------------------------------------------------------
 
@@ -174,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `m_user` (
   `nama_lengkap` varchar(255) DEFAULT NULL,
   `id_level` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `m_user`
@@ -183,7 +197,8 @@ CREATE TABLE IF NOT EXISTS `m_user` (
 INSERT INTO `m_user` (`id_user`, `username`, `password`, `nama_lengkap`, `id_level`, `status`) VALUES
 (3, 'penjualan', '13bf2c8effae21d17a277520aa9b9277', 'Borsak Sihombing', 2, 1),
 (5, 'gudang', '202446dd1d6028084426867365b0c7a1', 'Dede Wahidin', 3, 1),
-(7, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 1, 1);
+(7, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 1, 1),
+(8, 'coba', 'c3ec0f7b054e729c5a716c8125839829', 'Admin 1', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -227,7 +242,8 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
 
 INSERT INTO `pemesanan` (`id_pemesanan`, `tgl_pemesanan`, `id_user`, `total_bayar`, `status`) VALUES
 ('PN001251117', '2017-11-25 20:46:20', '7', '1055615', 1),
-('PN002251117', '2017-11-25 21:11:42', '7', '5244492', 1);
+('PN002251117', '2017-11-25 21:11:42', '7', '5244492', 1),
+('PN003031217', '2017-12-03 06:35:17', '7', '3000000', 1);
 
 -- --------------------------------------------------------
 
@@ -248,7 +264,8 @@ CREATE TABLE IF NOT EXISTS `penerimaan` (
 
 INSERT INTO `penerimaan` (`id_penerimaan`, `id_pemesanan`, `tgl_penerimaan`, `id_user`) VALUES
 ('PM001251117', 'PN001251117', '2017-11-25 22:51:14', '7'),
-('PM002261117', 'PN002251117', '2017-11-26 08:15:01', '7');
+('PM002261117', 'PN002251117', '2017-11-26 08:15:01', '7'),
+('PM003031217', 'PN003031217', '2017-12-03 06:35:50', '7');
 
 -- --------------------------------------------------------
 
@@ -260,19 +277,27 @@ CREATE TABLE IF NOT EXISTS `penjualan` (
   `id_transaksi` varchar(255) NOT NULL,
   `tgl_transaksi` datetime DEFAULT NULL,
   `id_user` varchar(255) DEFAULT NULL,
-  `total_bayar` varchar(255) DEFAULT NULL
+  `total_bayar` varchar(255) DEFAULT NULL,
+  `nama_pelanggan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `penjualan`
 --
 
-INSERT INTO `penjualan` (`id_transaksi`, `tgl_transaksi`, `id_user`, `total_bayar`) VALUES
-('TR001251117', '2017-12-01 22:02:59', '1', '100'),
-('TR002251117', '2017-12-01 22:02:59', '1', '350000 '),
-('TR003251117', '2017-11-25 18:08:46', '7', '250000'),
-('TR004251117', '2017-11-25 18:12:56', '7', '200000'),
-('TR005251117', '2017-11-25 18:39:50', '7', '100000');
+INSERT INTO `penjualan` (`id_transaksi`, `tgl_transaksi`, `id_user`, `total_bayar`, `nama_pelanggan`) VALUES
+('TR001251117', '2017-12-01 22:02:59', '1', '100', NULL),
+('TR002251117', '2017-12-01 22:02:59', '1', '350000 ', NULL),
+('TR003251117', '2017-11-25 18:08:46', '7', '250000', NULL),
+('TR004251117', '2017-11-25 18:12:56', '7', '200000', NULL),
+('TR005251117', '2017-11-25 18:39:50', '7', '100000', NULL),
+('TR006271117', '2017-11-27 15:55:49', '7', '500000', NULL),
+('TR008031217', '2017-12-03 06:45:30', '8', '200000', NULL),
+('TR009031217', '2017-12-03 06:47:47', '8', '4602323', NULL),
+('TR010031217', '2017-12-03 09:56:47', '7', '650000', 'Hendra'),
+('TR011031217', '2017-12-03 10:06:12', '7', '352323', 'Astri'),
+('TR012031217', '2017-12-03 10:08:03', '7', '100000', 'Bagus'),
+('TR013031217', '2017-12-03 10:15:11', '7', '100000', 'Arum');
 
 -- --------------------------------------------------------
 
@@ -286,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `tmp_detail_pemesanan` (
   `id_barang` varchar(255) DEFAULT NULL,
   `jumlah_pesan` int(11) DEFAULT NULL,
   `sub_total` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -299,8 +324,9 @@ CREATE TABLE IF NOT EXISTS `tmp_detail_penjualan` (
   `id_transaksi` varchar(255) DEFAULT NULL,
   `id_barang` varchar(255) DEFAULT NULL,
   `jumlah_beli` int(255) DEFAULT NULL,
-  `sub_total` int(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `sub_total` int(255) DEFAULT NULL,
+  `nama_pelanggan` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -395,7 +421,7 @@ ALTER TABLE `m_suplier`
 -- AUTO_INCREMENT for table `m_user`
 --
 ALTER TABLE `m_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `m_warna`
 --
@@ -405,12 +431,12 @@ ALTER TABLE `m_warna`
 -- AUTO_INCREMENT for table `tmp_detail_pemesanan`
 --
 ALTER TABLE `tmp_detail_pemesanan`
-  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tmp_detail_penjualan`
 --
 ALTER TABLE `tmp_detail_penjualan`
-  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

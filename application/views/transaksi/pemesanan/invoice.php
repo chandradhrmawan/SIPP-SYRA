@@ -127,7 +127,7 @@ function cetak()
                             </td>
                             <td>
                                 Kode Pemesanan #: <?php echo $data_penjualan[0]->id_pemesanan ?><br>
-                                Dibuat: <?php echo $data_penjualan[0]->tgl_pemesanan ?><br>
+                                Dibuat: <?php echo date('d-m-Y')  ?><br>
                             </td>
                         </tr>
                     </table>
@@ -140,7 +140,7 @@ function cetak()
                         <tr>
                             <td>
                                 Syra Hijab.<br>
-                                Jl Sukasari 2 No 275 Blok F Sadang Serang<br>
+                                jalan Budi Luhur No 6A<br>
                                 Bandung, Indonesia 14325
                             </td>
 

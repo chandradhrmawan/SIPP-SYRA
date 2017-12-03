@@ -45,7 +45,22 @@ class Penjualan extends CI_Controller {
 		$stok = $this->input->post('stok');
 		$jumlah_beli = $this->input->post('jumlah_beli');
 		$id_barang = $this->input->post('id_barang');
+		$harga_jual = $this->input->post('harga_jual');
+		$sub_total = $harga_jual * $jumlah_beli;
 
+		$nama_pelanggan = $this->input->post("nama_pelanggan");
+
+		
+		if(empty($nama_pelanggan)){
+			$this->session->set_flashdata('insert_gagal','Nama Pelanggan Belum Di Isi');
+			redirect('Penjualan');
+		}
+
+		if($sub_total==0){
+			$this->session->set_flashdata('insert_gagal','Sub Total Belum Terisi');
+			redirect('Penjualan');
+		}
+		
 		if($id_barang==0){
 			$this->session->set_flashdata('insert_gagal','Belum Pilih Barang');
 			redirect('Penjualan');
@@ -57,13 +72,23 @@ class Penjualan extends CI_Controller {
 		}
 
 		$data_detail = array(
-			'id_detail'		=> '',
-			'id_transaksi' 	=> $id_transaksi,
-			'id_barang'	=> $id_barang,
+			'id_detail'			=> '',
+			'id_transaksi' 		=> $id_transaksi,
+			'id_barang'			=> $id_barang,
 			'jumlah_beli'		=> $jumlah_beli,
-			'sub_total'			=> $this->input->post('sub_total')
+			'sub_total'			=> $sub_total,
+			'nama_pelanggan'	=> $this->input->post('nama_pelanggan')
 		);
-		$insert_detail = $this->PenjualanModel->insert_penjualan_detail($data_detail);
+
+		//cek isi
+		$cek_isi = $this->PenjualanModel->cek_isi($id_barang,$jumlah_beli);
+
+		if($cek_isi > 0){
+			$insert_detail = $this->PenjualanModel->update_penjualan_detail($id_barang,$jumlah_beli,$sub_total,$id_transaksi);
+		}else{
+			$insert_detail = $this->PenjualanModel->insert_penjualan_detail($data_detail);
+		}
+		
 
 		$kurang_stok = $this->PenjualanModel->kurang_stok($jumlah_beli,$id_barang);
 
@@ -82,11 +107,20 @@ class Penjualan extends CI_Controller {
 
 	public function insert_penjualan_final(){
 		$id_transaksi = $this->input->post('id_transaksi');
+
+		$nama_pelanggan = $this->input->post('nama_pelanggan');
+
+		if(empty($nama_pelanggan)){
+			$this->session->set_flashdata('insert_gagal','Nama Pelanggan Belum Di Isi');
+			redirect('Penjualan');
+		}
+
 		$data_penjualan = array(
 			'id_transaksi'		=> $this->input->post('id_transaksi'),
 			'tgl_transaksi' 	=> date('Y-m-d H:i:s'),
 			'id_user'			=> $this->input->post('id_user'),
-			'total_bayar'		=> $this->input->post('total_bayar')
+			'total_bayar'		=> $this->input->post('total_bayar'),
+			'nama_pelanggan'	=> $this->input->post('nama_pelanggan')
 		);
 
 		$copy_table = $this->PenjualanModel->copy_table($id_transaksi);

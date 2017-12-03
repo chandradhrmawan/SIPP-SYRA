@@ -23,6 +23,25 @@ class PenjualanModel extends CI_Model {
 		return TRUE;
 	}
 
+	public function cek_isi($id_barang,$jumlah_beli){
+		$query = $this->db->query("SELECT * FROM tmp_detail_penjualan 
+											WHERE id_barang = '$id_barang'
+			");
+	    $hasil = $query->num_rows();
+
+		return $hasil;
+
+	}
+
+	public function update_penjualan_detail($id_barang,$jumlah_beli,$sub_total,$id_transaksi){
+		$query = $this->db->query("UPDATE tmp_detail_penjualan SET jumlah_beli = jumlah_beli + '$jumlah_beli', 
+																		sub_total = sub_total + '$sub_total'
+																		WHERE id_barang ='$id_barang'
+																		AND id_transaksi = '$id_transaksi'");
+
+		return $query;
+	}
+
 	public function get_detail_penjualan($id_transaksi){
 		$query = $this->db->query("SELECT * FROM tmp_detail_penjualan,m_barang 
 			WHERE tmp_detail_penjualan.id_transaksi = '$id_transaksi'

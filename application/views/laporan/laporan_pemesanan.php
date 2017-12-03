@@ -47,7 +47,7 @@
                   <td style="border:none; text-align: center;" colspan="10" align="center" ><font face="verdana" align="center"><strong> Syra Hijab.</strong></font></td>
               </tr>
               <tr>
-                  <td style="border:none; text-align: center;" colspan="10"  align="center"> <strong> Jl. Tubagus Ismail Bawah No4 Bandung Kec Coblong</strong></td>
+                  <td style="border:none; text-align: center;" colspan="10"  align="center"> <strong> jalan Budi Luhur No 6A</strong></td>
               </tr>
               <tr>
                <td style="border:none; text-align: center;" colspan="10" align="center"><strong> Tlp.  08987997351</strong></td>

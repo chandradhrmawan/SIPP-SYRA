@@ -45,6 +45,10 @@
             <label for="id_user">Petugas</label>
             <input type="text" name="id_user" readonly class="form-control" value="<?php echo $this->session->userdata('nama_lengkap') ?>"/>
           </div>
+          <div class="col-xs-2">
+            <label for="nama_pelanggan">Nama Pelanggan</label>
+            <input type="text" name="nama_pelanggan" placeholder="Nama Pelanggan" value="<?php echo @$data_detail[0]->nama_pelanggan; ?>" class="form-control" />
+          </div>
         </div>
       </div>
     </div>
@@ -169,6 +173,7 @@
               <input type="hidden" name="id_detail" value="<?php echo $value->id_detail; ?>">
               <input type="hidden" name="id_barang" value="<?php echo $value->id_barang; ?>">
               <input type="hidden" name="jumlah_beli" value="<?php echo $value->jumlah_beli; ?>">
+              <input type="hidden" name="nama_pelanggan" value="<?php echo $value->nama_pelanggan; ?>">
               <tr>  
                 <td><?php echo $no; ?></td>
                 <td><?php echo $value->nama_barang ?></td>
@@ -195,6 +200,7 @@
           <input type="hidden" name="id_transaksi" value="<?php echo $hasilkode; ?>">
           <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
           <input type="hidden" name="total_bayar" value="<?php echo $total_bayar; ?>">
+          <input type="hidden" name="nama_pelanggan" value="<?php echo @$data_detail[0]->nama_pelanggan; ?>">
           <div class="form-group">
             <label class="col-sm-1 control-label"></label>
             <div class="col-sm-3" align="left">

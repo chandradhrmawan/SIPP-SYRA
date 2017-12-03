@@ -127,7 +127,8 @@ function cetak()
                             </td>
                             <td>
                                 Invoice #: <?php echo $data_penjualan[0]->id_transaksi ?><br>
-                                Created: <?php echo $data_penjualan[0]->tgl_transaksi ?><br>
+                                Created: <?php echo date('d-m-Y')  ?><br>
+                                Nama Pelanggan: <?php echo $data_penjualan[0]->nama_pelanggan  ?><br>
                             </td>
                         </tr>
                     </table>
@@ -140,7 +141,7 @@ function cetak()
                         <tr>
                             <td>
                                 Syra Hijab.<br>
-                                Jl Sukasari 2 No 275 Blok F Sadang Serang<br>
+                                jalan Budi Luhur No 6A<br>
                                 Bandung, Indonesia 14325
                             </td>
 
@@ -189,7 +190,7 @@ function cetak()
                 <td></td>
 
                 <td colspan="3">
-                 Total: Rp. <?php echo @number_format($data_penjualan[1]->total_bayar); ?>
+                 Total: Rp. <?php echo @number_format($data_penjualan[0]->total_bayar); ?>
              </td>
          </tr>
          <tr>
