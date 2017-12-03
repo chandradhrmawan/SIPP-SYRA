@@ -123,11 +123,11 @@ function cetak()
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
+                                <img src="<?php echo base_url() ?>assets/img/syra_goodiebag.jpg" width="200" height="200">
                             </td>
                             <td>
-                                Invoice #: <?php echo $data_penjualan[1]->id_transaksi ?><br>
-                                Created: <?php echo $data_penjualan[1]->tgl_transaksi ?><br>
+                                Invoice #: <?php echo $data_penjualan[0]->id_transaksi ?><br>
+                                Created: <?php echo $data_penjualan[0]->tgl_transaksi ?><br>
                             </td>
                         </tr>
                     </table>

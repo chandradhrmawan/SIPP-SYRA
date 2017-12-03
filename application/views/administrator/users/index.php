@@ -31,7 +31,7 @@
         <div class="box-body">
           <div class="row">
             <div class="col-xs-12">
-              <button class="btn btn-primary pull-right" onclick="add_Users()"><span class="fa fa-plus"></span> Tambah Master Users</button>
+              <button class="btn btn-primary btn-flat pull-right" onclick="add_Users()"><span class="fa fa-plus"></span> Tambah Master Users</button>
             </div>
           </div>
           <br>
@@ -141,7 +141,6 @@
         {
           $('[name="id_user"]').val(data.id_user);
           $('[name="username"]').val(data.username);
-          $('[name="password"]').val(data.password);
           $('[name="nama_lengkap"]').val(data.nama_lengkap);
           $('[name="id_level"]').val(data.id_level);
           $('[name="status"]').val(data.status);
@@ -194,7 +193,7 @@
               </div>
               <div class="form-group">
                 <label for="password" class="form-control-label">Password</label>
-                <input name="password" placeholder="Isi Username" class="form-control" type="password" required="required">
+                <input name="password" placeholder="Isi Password" class="form-control" type="password" required="required">
               </div>
               <div class="form-group">
                 <label for="nama_level" class="form-control-label">Level</label>

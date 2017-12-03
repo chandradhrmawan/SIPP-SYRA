@@ -78,5 +78,19 @@ class PenjualanModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function get_detail($id_transaksi){
+		$query = $this->db->query("SELECT * FROM detail_penjualan,m_barang 
+			WHERE detail_penjualan.id_transaksi = '$id_transaksi'
+			AND detail_penjualan.id_barang = m_barang.id_barang");
+		return $query->result();
+	}
+
+	public function get_transaksi($id_transaksi){
+		$query = $this->db->query("SELECT * FROM penjualan,m_user 
+			WHERE penjualan.id_transaksi = '$id_transaksi'
+			AND penjualan.id_user = m_user.id_user");
+		return $query->row_array();
+	}
+
 }
 ?>

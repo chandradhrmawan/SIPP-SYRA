@@ -123,12 +123,12 @@ function cetak()
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
+                                <img src="<?php echo base_url() ?>assets/img/syra_goodiebag.jpg" width="200" height="200">
                             </td>
                             <td>
-                                Kode Pemesanan #: <?php echo $data_penjualan[1]->id_pemesanan ?><br>
+                                Kode Pemesanan #: <?php echo $data_penjualan[0]->id_pemesanan ?><br>
                                 Kode Penerimaan #: <?php echo $data_penerimaan[0]->id_penerimaan ?><br>
-                                Dibuat: <?php echo $data_penjualan[1]->tgl_pemesanan ?><br>
+                                Dibuat: <?php echo $data_penjualan[0]->tgl_pemesanan ?><br>
                             </td>
                         </tr>
                     </table>

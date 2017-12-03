@@ -72,5 +72,19 @@ class PemesananModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function get_detail($id_pemesanan){
+		$query = $this->db->query("SELECT * FROM detail_pemesanan,m_barang 
+			WHERE detail_pemesanan.id_pemesanan = '$id_pemesanan'
+			AND detail_pemesanan.id_barang = m_barang.id_barang");
+		return $query->result();
+	}
+
+	public function get_pemesanan($id_pemesanan){
+		$query = $this->db->query("SELECT * FROM pemesanan,m_user 
+			WHERE pemesanan.id_pemesanan = '$id_pemesanan'
+			AND pemesanan.id_user = m_user.id_user");
+		return $query->row_array();
+	}
+
 }
 ?>

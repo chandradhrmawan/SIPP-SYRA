@@ -152,4 +152,18 @@ class Penjualan extends CI_Controller {
 		);
 		$this->load->view('layout/wrapper', $data);
 	}
+
+	public function view_detail_penjualan(){
+
+		$id_penjualan = $this->uri->segment(3);		
+
+		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
+			'head'	=> 'Detail Transaksi Penjualan',
+			'isi' 	=> 'transaksi/penjualan/detail_penjualan',
+			'bread' => 'Riwayat Transaksi Penjualan',
+			'data_transaksi' => $this->PenjualanModel->get_transaksi($id_penjualan),
+			'data_penjualan' => $this->PenjualanModel->get_detail($id_penjualan)
+		);
+		$this->load->view('layout/wrapper', $data);
+	}
 }

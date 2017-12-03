@@ -138,8 +138,22 @@ class Pemesanan extends CI_Controller {
 		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
 			'head'	=> 'Riwayat Pemesanan',
 			'isi' 	=> 'transaksi/pemesanan/riwayat_pemesanan',
-			'bread' => 'Riwayat Penjualan',
+			'bread' => 'Riwayat Pemesanan',
 			'data_pemesanan' => $this->PemesananModel->get_riwayat_pemesanan()
+		);
+		$this->load->view('layout/wrapper', $data);
+	}
+
+	public function view_detail_pemesanan(){
+
+		$id_pemesanan = $this->uri->segment(3);		
+
+		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
+			'head'	=> 'Detail Transaksi Pemesanan',
+			'isi' 	=> 'transaksi/pemesanan/detail_pemesanan',
+			'bread' => 'Riwayat Transaksi Pemesanan',
+			'data_pemesanan' => $this->PemesananModel->get_pemesanan($id_pemesanan),
+			'data_detail_pesan' => $this->PemesananModel->get_detail($id_pemesanan)
 		);
 		$this->load->view('layout/wrapper', $data);
 	}

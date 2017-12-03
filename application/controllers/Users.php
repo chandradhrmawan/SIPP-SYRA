@@ -94,13 +94,23 @@ class Users extends CI_Controller {
 
 	public function ajax_update()
 	{
-		$data = array(
+		if(empty($this->input->post('password'))){
+				$data = array(
+				'username' 				=> $this->input->post('username'),
+				'nama_lengkap'	  	  	=> $this->input->post('nama_lengkap'),
+				'id_level'				=> $this->input->post('id_level'),
+				'status'				=> $this->input->post('status')
+				);
+		}else{
+			$data = array(
 			'username' 				=> $this->input->post('username'),
 			'password' 				=> md5($this->input->post('password')),
 			'nama_lengkap'	  	  	=> $this->input->post('nama_lengkap'),
 			'id_level'				=> $this->input->post('id_level'),
 			'status'				=> $this->input->post('status')
 		);
+		}
+		
 		$this->UsersModel->update(array('id_user' => $this->input->post('id_user')), $data);
 		echo json_encode(array("status" => TRUE));
 	}
