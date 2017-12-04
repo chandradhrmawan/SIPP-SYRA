@@ -7,11 +7,6 @@
         </div>  
        <!-- /.box-header -->
        <div class="box-body">
-        <div class="row">
-          <div class="col-xs-12">
-            <a href="<?php echo base_url() ?>Pemerimaan"><button class="btn btn-primary pull-right btn-flat"><span class="fa fa-plus"></span> Tambah Penerimaan</button></a>
-          </div>
-        </div>
         <br>
         <div class="table-responsive">
           <table class="table table-hover table-striped table-bordered" id="example1" style="width: 100% important!;">

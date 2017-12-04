@@ -137,7 +137,10 @@
         {
                //if success close modal and reload ajax table
                $('#modal_form').modal('hide');
+              
+               location.replace('<?php echo base_url() ?>Barang/index');
                reload_table();
+               
              },
              error: function (jqXHR, textStatus, errorThrown)
              {
