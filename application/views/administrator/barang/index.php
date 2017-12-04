@@ -62,7 +62,7 @@
               <td> <?php echo $value->keterangan; ?> </td>
               <td>Rp. <?php echo number_format($value->harga_jual); ?> </td>
               <td>Rp. <?php echo number_format($value->harga_beli); ?> </td>
-              <td> <?php echo $value->direktori; ?> </td>
+              <td> <img src="<?php echo base_url() ?>uploads/barang/<?php echo $value->direktori ?>" height="100" width="100">  </td>
               <td> <center><a  href="#" title="Edit" onclick="edit_Barang(<?php echo $value->id_barang?>)" ><i class="fa fa-pencil"></i> Edit</a>|
                 <a  href="<?php echo base_url()?>Barang/delete_barang/<?php echo $value->id_barang?>" title="Delete" ><i class="fa fa-trash"></i> Delete</a></center> </td>
                 </tr>
