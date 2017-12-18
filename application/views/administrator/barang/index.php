@@ -26,6 +26,10 @@
          <?php echo $this->session->flashdata('insert_sukses'); ?>
        </div>
        <?php } ?>
+       <!-- jQuery 2.2.3 -->
+       <script src="http://localhost/sipp_syra/assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
+       <!-- DataTables -->
+       <script src="http://localhost/sipp_syra/assets/plugins/datatables/jquery.dataTables.min.js"></script>
 
        <!-- /.box-header -->
        <div class="box-body">
@@ -52,60 +56,30 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($get_barang as $key => $value) { ?>
+              <?php $no=1; foreach ($get_barang as $key => $value) {  ?>
               <tr>
-              <td> <?php echo $value->id_barang; ?> </td>
-              <td> <?php echo $value->nama_barang; ?> </td>
-              <td> <?php echo $value->nama_kategori; ?> </td>
-              <td> <?php echo $value->nama_warna; ?> </td>
-              <td> <?php echo $value->stok; ?> </td>
-              <td> <?php echo $value->keterangan; ?> </td>
-              <td>Rp. <?php echo number_format($value->harga_jual); ?> </td>
-              <td>Rp. <?php echo number_format($value->harga_beli); ?> </td>
-              <td> <img src="<?php echo base_url() ?>uploads/barang/<?php echo $value->direktori ?>" height="100" width="100">  </td>
-              <td> <center><a  href="#" title="Edit" onclick="edit_Barang(<?php echo $value->id_barang?>)" ><i class="fa fa-pencil"></i> Edit</a>|
-                <a  href="<?php echo base_url()?>Barang/delete_barang/<?php echo $value->id_barang?>" title="Delete" ><i class="fa fa-trash"></i> Delete</a></center> </td>
+                <td> <?php echo $no; ?> </td>
+                <td> <?php echo $value->nama_barang; ?> </td>
+                <td> <?php echo $value->nama_kategori; ?> </td>
+                <td> <?php echo $value->nama_warna; ?> </td>
+                <td> <?php echo $value->stok; ?> </td>
+                <td> <?php echo $value->keterangan; ?> </td>
+                <td>Rp. <?php echo number_format($value->harga_jual); ?> </td>
+                <td>Rp. <?php echo number_format($value->harga_beli); ?> </td>
+                <td> <img src="<?php echo base_url() ?>uploads/barang/<?php echo $value->direktori ?>" height="100" width="100">  </td>
+                <td> <center><a  href="#" title="Edit" onclick="edit_Barang(<?php echo $value->id_barang?>)" ><i class="fa fa-pencil"></i> Edit</a>|
+                  <a  href="<?php echo base_url()?>Barang/delete_barang/<?php echo $value->id_barang?>" title="Delete" ><i class="fa fa-trash"></i> Delete</a></center> </td>
                 </tr>
-                <?php } ?>
+                <?php $no++; } ?>
               </tbody>
             </table>
           </div>
-          <script src="<?php echo base_url('assets/datatables/jquery/jquery-2.1.4.min.js')?>"></script>
           <script type="text/javascript">
-    var save_method; //for save method string
-    var table;
-    $(document).ready(function() { //TAMPIL DATA TABLE SERVER SIDE
-      /*table = $('#table').DataTable({ 
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-          "url": "<?php echo site_url('Barang/list_data')?>",
-          "type": "POST"
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        
-        { 
-
-          "targets": [ 0,1,2 ], //last column
-          "class":"text-center",
-          "orderable": true, //set not orderable
-        },
-
-        ],
-        "order": [[0, 'desc']]
-
-      });*/
-    });
-    
-    function add_Barang()
-    {
-      save_method = 'add';
+            
+            
+            function add_Barang()
+            {
+              save_method = 'add';
       $('#form')[0].reset(); // reset form on modals
       $('#modal_form').modal('show'); // show bootstrap modal
       $('.modal-title').text('Tambah Barang'); // Set Title to Bootstrap modal title
@@ -137,7 +111,7 @@
         {
                //if success close modal and reload ajax table
                $('#modal_form').modal('hide');
-              
+               
                location.replace('<?php echo base_url() ?>Barang/index');
                reload_table();
                
@@ -268,62 +242,62 @@
       </div>
       <div class="modal-body">
         <form action="<?php echo base_url() ?>barang/tambah_barang" method="POST" enctype="multipart/form-data" />
-        <div class="modal-body form">
-          <div class="row col-md-12 center">             
+          <div class="modal-body form">
+            <div class="row col-md-12 center">             
               <input type="hidden" name="id_barang" placeholder="Kode Barang" class="form-control" required="required">
-            <div class="form-group">
-              <label for="nama_barang" class="form-control-label">Nama Barang</label>
-              <input type="text" name="nama_barang" placeholder="Nama Barang" class="form-control" required="required">
-            </div>
-            <div class="form-group">
-              <label for="id_kategori" class="form-control-label">Kategori</label>
-              <select name="id_kategori" class="form-control" type="text" required="required">
-                <?php foreach ($get_kategori as $key => $value) { ?>
-                <option value="<?php echo $value->id_kategori ?>"><?php echo $value->nama_kategori ?></option>
-                <?php  } ?>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="id_warna" class="form-control-label">Warna</label>
-              <select name="id_warna" class="form-control" type="text" required="required">
-                <?php foreach ($get_warna as $key => $value) { ?>
-                <option value="<?php echo $value->id_warna ?>"><?php echo $value->nama_warna ?></option>
-                <?php  } ?>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="stok" class="form-control-label">Stok</label>
-              <input name="stok" placeholder="Jumlah Stok" class="form-control" type="number" required="required">
-            </div>
-            <div class="form-group">
-              <label for="keterangan" class="form-control-label">Keterangan</label>
-              <textarea name="keterangan" class="form-control" required="required" cols="5" rows="3">Isi Deskripsi Barang</textarea>
-            </div>
-            <div class="form-group">
-              <label for="harga_jual" class="form-control-label">Harga Jual</label>
-              <input name="harga_jual" placeholder="Harga Jual" class="form-control" type="number" required="required">
-            </div>
-            <div class="form-group">
-              <label for="harga_beli" class="form-control-label">Harga Beli</label>
-              <input name="harga_beli" placeholder="Jumlah Stok" class="form-control" type="number" required="required">
-            </div>
-            <div class="form-group">
-              <label for="direktori" class="form-control-label">Foto Barang</label>
-              <input name="direktori" placeholder="Gambar Barang" class="form-control" type="file" required="required">
+              <div class="form-group">
+                <label for="nama_barang" class="form-control-label">Nama Barang</label>
+                <input type="text" name="nama_barang" placeholder="Nama Barang" class="form-control" required="required">
+              </div>
+              <div class="form-group">
+                <label for="id_kategori" class="form-control-label">Kategori</label>
+                <select name="id_kategori" class="form-control" type="text" required="required">
+                  <?php foreach ($get_kategori as $key => $value) { ?>
+                  <option value="<?php echo $value->id_kategori ?>"><?php echo $value->nama_kategori ?></option>
+                  <?php  } ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="id_warna" class="form-control-label">Warna</label>
+                <select name="id_warna" class="form-control" type="text" required="required">
+                  <?php foreach ($get_warna as $key => $value) { ?>
+                  <option value="<?php echo $value->id_warna ?>"><?php echo $value->nama_warna ?></option>
+                  <?php  } ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="stok" class="form-control-label">Stok</label>
+                <input name="stok" placeholder="Jumlah Stok" class="form-control" type="number" required="required">
+              </div>
+              <div class="form-group">
+                <label for="keterangan" class="form-control-label">Keterangan</label>
+                <textarea name="keterangan" class="form-control" required="required" cols="5" rows="3">Isi Deskripsi Barang</textarea>
+              </div>
+              <div class="form-group">
+                <label for="harga_jual" class="form-control-label">Harga Jual</label>
+                <input name="harga_jual" placeholder="Harga Jual" class="form-control" type="number" required="required">
+              </div>
+              <div class="form-group">
+                <label for="harga_beli" class="form-control-label">Harga Beli</label>
+                <input name="harga_beli" placeholder="Jumlah Stok" class="form-control" type="number" required="required">
+              </div>
+              <div class="form-group">
+                <label for="direktori" class="form-control-label">Foto Barang</label>
+                <input name="direktori" placeholder="Gambar Barang" class="form-control" type="file" required="required">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success btn-flat" type="submit" name="submit">
-            Confirm
-          </button>
-          <button type="reset" class="btn btn-danger btn-flat"  data-dismiss="modal" aria-hidden="true">
-            Cancel
-          </button>
-        </div>
-      </form>
+          <div class="modal-footer">
+            <button class="btn btn-success btn-flat" type="submit" name="submit">
+              Confirm
+            </button>
+            <button type="reset" class="btn btn-danger btn-flat"  data-dismiss="modal" aria-hidden="true">
+              Cancel
+            </button>
+          </div>
+        </form>
 
+      </div>
     </div>
   </div>
-</div>
 </div>
