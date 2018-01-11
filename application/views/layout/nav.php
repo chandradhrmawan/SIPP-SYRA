@@ -45,6 +45,7 @@
       <li class="header">TRANSAKSI</li>
       <li class="<?php if($this->uri->uri_string() == 'Pemesanan'){echo "active";}else{echo "";} ?>" ><a href="<?php echo base_url()?>Pemesanan"><i class="fa fa-phone"></i> <span>PEMESANAN</span></a></li>
       <li class="<?php if($this->uri->uri_string() == 'Penerimaan'){echo "active";}else{echo "";} ?>" ><a href="<?php echo base_url()?>Penerimaan"><i class="fa fa-plane"></i> <span>PENERIMAAN</span></a></li>
+      <li class="<?php if($this->uri->uri_string() == 'Retur'){echo "active";}else{echo "";} ?>" ><a href="<?php echo base_url()?>Retur"><i class="fa fa-edit"></i> <span>RETUR</span></a></li>
       <li class="header">HISTORY DAN LAPORAN</li>
       <li class="<?php if($this->uri->uri_string() == 'Pemesanan/riwayat_pemesanan'){echo "active";}else{echo "";} ?>" ><a href="<?php echo base_url()?>Pemesanan/riwayat_pemesanan"><i class="fa fa-book"></i> <span>DATA PEMESANAN</span></a></li>
       <li class="<?php if($this->uri->uri_string() == 'Laporan'){echo "active";}else{echo "";} ?>" ><a href="<?php echo base_url()?>Laporan"><i class="fa fa-file"></i> <span>LAPORAN</span></a></li>
