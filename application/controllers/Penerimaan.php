@@ -74,6 +74,7 @@ class Penerimaan extends CI_Controller {
 			'id_pemesanan'		=> $this->input->post('id_pemesanan'),
 			'tgl_penerimaan' 	=> date('Y-m-d H:i:s'),
 			'id_user'			=> $this->input->post('id_user'),
+			'status'			=> '1'		
 		);
 
 

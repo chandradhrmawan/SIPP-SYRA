@@ -15,7 +15,7 @@
                 <th class="text-center" width="2%">No.</th>
                 <th class="text-center" >Kode Penerimaan</th>
                 <th class="text-center" >Tanggal Penerimaan</th>
-                <th class="text-center" >Petugas Pelayan</th>
+                <th class="text-center" >Status</th>
                 <th class="text-center" width="20%">Action</th>
               </tr>
             </thead>
@@ -23,13 +23,20 @@
               <?php 
               $no=1;
               foreach ($data_retur as $key => $value) { 
+                  if($value->status == 1){
+                    $dis = '';
+                    $status = '<span class="label label-success">Utuh</span>';
+                  }else{
+                    $status = '<span class="label label-danger">Sudah Di Retur</span>';
+                    $dis = 'disabled';
+                  }
               ?>
               <tr>
               <td> <?php echo $no; ?> </td>
               <td> <?php echo $value->id_penerimaan; ?> </td>
               <td> <?php echo $value->tgl_penerimaan; ?> </td>
-              <td> <?php echo $value->nama_lengkap; ?> </td>
-              <td> <center><a  href="<?php echo base_url() ?>Retur/retur_barang/<?php echo $value->id_pemesanan; ?>" title="View" ><button class='btn btn-warning btn-md btn-flat'> <i class="fa fa-edit"></i>  Retur </button></a>
+              <td> <?php echo $status; ?> </td>
+              <td> <center><a  href="<?php echo base_url() ?>Retur/retur_barang/<?php echo $value->id_pemesanan; ?>" title="View" ><button <?php echo $dis; ?> class='btn btn-info btn-md btn-flat'> <i class="fa fa-edit"></i>  Retur </button></a>
                 </center> </td>
                 </tr>
                 <?php $no++; } ?>

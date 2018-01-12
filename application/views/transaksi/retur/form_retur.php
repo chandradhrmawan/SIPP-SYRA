@@ -25,7 +25,7 @@
  </div>
 </div>
 
-<form class="form-horizontal" action="<?php echo base_url() ?>Pemesanan/insert_pemesanan" method="post" enctype="multipart/form-data">
+<form class="form-horizontal" action="<?php echo base_url() ?>Retur/insert_retur" method="post" enctype="multipart/form-data">
   <div class="row">
    <div class="col-md-12">
     <div class="box-body">
@@ -52,7 +52,6 @@
 </div>
 </div>
 <!-- DATA TRANSAKSI -->
-</form>
 
 <!-- DATA TRANSAKSI -->
 <div class="row">
@@ -68,8 +67,8 @@
               <th>Nama barang</th>
               <th>Harga Satuan</th>
               <th>Jumlah Pesan</th>
-              <th>Sub Total</th>
-              <th>Action</th>
+              <th>Alasan Retur</th>
+              <!-- <th>Action</th> -->
             </tr>
           </thead>
           <tbody>
@@ -77,31 +76,43 @@
             $total_bayar = 0; 
             $no=1;
             foreach ($data_detail as $key => $value) { ?>
-            <form action="<?php echo base_url() ?>Penerimaan/insert_penerimaan_final" method="POST">
-              <input type="hidden" name="id_detail" value="<?php echo $value->id_detail; ?>">
-              <input type="hidden" name="id_barang[]" value="<?php echo $value->id_barang; ?>">
-              <input type="hidden" name="jumlah_pesan[]" value="<?php echo $value->jumlah_pesan; ?>">
-              <tr>  
-                <td><?php echo $no; ?></td>
-                <td><?php echo $value->nama_barang ?></td>
-                <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
-                <td><?php echo $value->jumlah_pesan ?> Pcs</td>
-                <td>Rp.<?php echo number_format($value->sub_total) ?></td>
-                <td><button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()"><i class="fa fa-plus"> RETUR</i></button></td>
-              </tr>
-            </form>
+            <input type="hidden" name="id_retur" value="<?php echo $id_retur; ?>">
+            <input type="hidden" name="id_barang" value="<?php echo $value->id_barang; ?>">
+            <input type="hidden" name="jumlah_retur" value="<?php echo $value->jumlah_pesan; ?>">
+            <tr>  
+              <td><?php echo $no; ?></td>
+              <td><?php echo $value->nama_barang ?></td>
+              <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
+              <td><div class="col-xs-6">
+                <input type="text" name="jumlah_pesan" class="form-control" value="<?php echo $value->jumlah_pesan ?>">
+              </div>
+            Pcs</td>
+            <td>
+              <div class="col-xs-12">
+                <input type="text" name="alasan" class="form-control">
+              </div>
+            </td>
+              <!-- <td>
+                <button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()">
+                  <i class="fa fa-plus"> 
+                RETUR</i></button>
+              </td> -->
+            </tr>
             <?php
             $total_bayar = $total_bayar + $value->sub_total;
             $no++;
           } ?>
         </tbody>
-        <!-- <tfoot>
-          <td colspan="4" style="text-align: right;">Total Bayar</td>
-          <td colspan="2">Rp <?php echo number_format($total_bayar); ?> </td>
-        </tfoot> -->
-      </table>
+        <tfoot>
+          <td colspan="6" style="text-align: left;">
+            <button type="submit" name="simpan" class="btn btn-success btn-sm btn-flat" onClick="tekan()">
+              <i class="fa fa-plus"> 
+              PROSES</i></button>
+            </td>
+          </tfoot>
+        </table>
 
-      <!-- <input type="hidden" name="id_penerimaan" value="<?php echo $id_penerimaan; ?>"> -->
+        <!-- <input type="hidden" name="id_penerimaan" value="<?php echo $id_penerimaan; ?>"> -->
       <!-- <input type="hidden" name="id_pemesanan" value="<?php echo $id_pemesanan; ?>">
       <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
       <input type="hidden" name="status" value="<?php echo '1'; ?>"> -->
@@ -142,19 +153,17 @@
             $total_bayar = 0; 
             $no=1;
             foreach ($data_tmp_retur as $key => $value) { ?>
-            <form action="<?php echo base_url() ?>Penerimaan/insert_penerimaan_final" method="POST">
-              <input type="hidden" name="id_detail" value="<?php echo $value->id_detail; ?>">
-              <input type="hidden" name="id_barang[]" value="<?php echo $value->id_barang; ?>">
-              <input type="hidden" name="jumlah_pesan[]" value="<?php echo $value->jumlah_pesan; ?>">
-              <tr>  
-                <td><?php echo $no; ?></td>
-                <td><?php echo $value->nama_barang ?></td>
-                <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
-                <td><?php echo $value->jumlah_pesan ?> Pcs</td>
-                <td>Rp.<?php echo number_format($value->sub_total) ?></td>
-                <td><button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()"><i class="fa fa-plus"> SUMBIT</i></button></td>
-              </tr>
-            </form>
+            <input type="hidden" name="id_detail" value="<?php echo $value->id_detail; ?>">
+            <input type="hidden" name="id_barang[]" value="<?php echo $value->id_barang; ?>">
+            <input type="hidden" name="jumlah_pesan[]" value="<?php echo $value->jumlah_pesan; ?>">
+            <tr>  
+              <td><?php echo $no; ?></td>
+              <td><?php echo $value->nama_barang ?></td>
+              <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
+              <td><?php echo $value->jumlah_pesan ?> Pcs</td>
+              <td>Rp.<?php echo number_format($value->sub_total) ?></td>
+              <td><button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()"><i class="fa fa-plus"> SUMBIT</i></button></td>
+            </tr>
             <?php
             $total_bayar = $total_bayar + $value->sub_total;
             $no++;
@@ -165,7 +174,6 @@
           <td colspan="2">Rp <?php echo number_format($total_bayar); ?> </td>
         </tfoot> -->
       </table>
-
       <!-- <input type="hidden" name="id_penerimaan" value="<?php echo $id_penerimaan; ?>"> -->
       <!-- <input type="hidden" name="id_pemesanan" value="<?php echo $id_pemesanan; ?>">
       <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
@@ -178,8 +186,9 @@
         </div>
       </div> -->
 
-    </div>
+    </form>
   </div>
+</div>
 </div>
 </div>
 </div>

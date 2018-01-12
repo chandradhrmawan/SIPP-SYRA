@@ -38,7 +38,7 @@ class ReturModel extends CI_Model {
 	}
 
 	public function get_riwayat_penerimaan(){
-		$query = $this->db->query("SELECT * FROM penerimaan,m_user WHERE penerimaan.id_user = m_user.id_user");
+		$query = $this->db->query("SELECT * FROM penerimaan");
 		return $query->result();
 	}
 

@@ -69,6 +69,12 @@ class Retur extends CI_Controller {
 
 	}
 
+	public function insert_retur(){
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
+	}
+
 	public function insert_penerimaan_final(){
 		$id_penerimaan = $this->input->post('id_penerimaan');
 		$id_pemesanan = $this->input->post('id_pemesanan');

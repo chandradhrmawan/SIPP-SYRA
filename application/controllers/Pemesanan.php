@@ -56,7 +56,8 @@ class Pemesanan extends CI_Controller {
 			'id_pemesanan' 		=> $id_pemesanan,
 			'id_barang'			=> $id_barang,
 			'jumlah_pesan'		=> $jumlah_pesan,
-			'sub_total'			=> $this->input->post('sub_total')
+			'sub_total'			=> $this->input->post('sub_total'),
+			'status_barang'		=> '0'
 		);
 		$insert_detail = $this->PemesananModel->insert_pemesanan_detail($data_detail);
 
