@@ -173,7 +173,7 @@
                 <td><?php echo $value->nama_barang ?></td>
                 <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
                 <td><?php echo $value->jumlah_pesan ?> Pcs</td>
-                <td>Rp.<?php echo number_format($value->sub_total) ?></td>
+                <td>Rp.<?php echo number_format($value->harga_beli * $value->jumlah_pesan) ?></td>
                 <td align="center">
                   <button type="submit" name="hapus" class="btn btn-danger btn-sm btn-flat">
                     <i class="fa fa-trash"></i> Hapus</button>
@@ -181,7 +181,7 @@
                 </tr> 
               </form>
               <?php
-              $total_bayar = $total_bayar + $value->sub_total;
+              $total_bayar = $total_bayar + ($value->harga_beli * $value->jumlah_pesan);
               $no++;
             } ?>
           </tbody>

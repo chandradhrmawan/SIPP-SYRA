@@ -24,13 +24,19 @@ class ReturModel extends CI_Model {
 	}
 
 	public function get_data_tmp_retur($id_pemesanan){
-		$query = $this->db->query("SELECT * FROM tmp_detail_retur,m_barang 
-			WHERE tmp_detail_retur.id_barang = m_barang.id_barang");
+		$query = $this->db->query("SELECT detail_retur.*, 
+			m_barang.nama_barang,
+			m_barang.harga_beli  
+			FROM detail_retur,m_barang 
+			WHERE detail_retur.id_barang = m_barang.id_barang
+			AND detail_retur.id_pemesanan = '$id_pemesanan'");
 		return $query->result();
 	}
 
 	public function get_data_penerimaan($id_pemesanan){
-		$query = $this->db->query("SELECT * FROM detail_pemesanan,m_barang,pemesanan 
+		$query = $this->db->query("SELECT * FROM detail_pemesanan,
+			m_barang,
+			pemesanan 
 			WHERE detail_pemesanan.id_pemesanan = '$id_pemesanan'
 			AND detail_pemesanan.id_pemesanan = pemesanan.id_pemesanan
 			AND detail_pemesanan.id_barang = m_barang.id_barang");
@@ -45,6 +51,17 @@ class ReturModel extends CI_Model {
 	public function update_status($id_pemesanan){
 		$query = $this->db->query("UPDATE pemesanan SET status = '1' WHERE id_pemesanan = '$id_pemesanan'");
 		return TRUE;
+	}
+
+	//INSET DETAIL RETUR
+	public function insert_detail_retur($data_retur){
+		$this->db->insert("detail_retur", $data_retur);
+		return true;
+	}
+
+	public function insert_retur($data){
+		$this->db->insert("retur", $data);
+		return true;
 	}
 
 }

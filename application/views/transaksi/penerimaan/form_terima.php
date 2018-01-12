@@ -89,11 +89,11 @@
                 <td><?php echo $value->nama_barang ?></td>
                 <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
                 <td><?php echo $value->jumlah_pesan ?> Pcs</td>
-                <td>Rp.<?php echo number_format($value->sub_total) ?></td>
+                <td>Rp.<?php echo number_format($value->harga_beli * $value->jumlah_pesan) ?></td>
                 </tr>
 
               <?php
-              $total_bayar = $total_bayar + $value->sub_total;
+              $total_bayar = $total_bayar + ($value->harga_beli * $value->jumlah_pesan);
               $no++;
             } ?>
           </tbody>

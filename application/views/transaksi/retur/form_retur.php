@@ -75,28 +75,29 @@
             <?php
             $total_bayar = 0; 
             $no=1;
-            foreach ($data_detail as $key => $value) { ?>
-            <input type="hidden" name="id_retur" value="<?php echo $id_retur; ?>">
-            <input type="hidden" name="id_barang" value="<?php echo $value->id_barang; ?>">
-            <input type="hidden" name="jumlah_retur" value="<?php echo $value->jumlah_pesan; ?>">
-            <tr>  
-              <td><?php echo $no; ?></td>
-              <td><?php echo $value->nama_barang ?></td>
-              <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
-              <td><div class="col-xs-6">
-                <input type="text" name="jumlah_pesan" class="form-control" value="<?php echo $value->jumlah_pesan ?>">
-              </div>
-            Pcs</td>
-            <td>
-              <div class="col-xs-12">
-                <input type="text" name="alasan" class="form-control">
-              </div>
-            </td>
-              <!-- <td>
-                <button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()">
-                  <i class="fa fa-plus"> 
-                RETUR</i></button>
-              </td> -->
+            $dis_app = '';
+            foreach ($data_detail as $key => $value) { 
+              if($value->status_barang == 2){
+                $dis_app = 'disabled';
+              }else{
+                $dis_app = '';
+              }
+              ?>
+              <input type="hidden" name="id_retur" value="<?php echo $id_retur; ?>">
+              <input type="hidden" name="id_barang[]" value="<?php echo $value->id_barang; ?>">
+              <tr>  
+                <td><?php echo $no; ?></td>
+                <td><?php echo $value->nama_barang ?></td>
+                <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
+                <td><div class="col-xs-6">
+                  <input type="text" <?php echo $dis_app; ?> name="jumlah_retur[]" class="form-control" value="<?php echo $value->jumlah_pesan ?>">
+                </div>
+              Pcs</td>
+              <td>
+                <div class="col-xs-12">
+                  <input type="text" name="alasan[]" class="form-control" <?php echo $dis_app; ?> >
+                </div>
+              </td>
             </tr>
             <?php
             $total_bayar = $total_bayar + $value->sub_total;
@@ -104,26 +105,21 @@
           } ?>
         </tbody>
         <tfoot>
-          <td colspan="6" style="text-align: left;">
-            <button type="submit" name="simpan" class="btn btn-success btn-sm btn-flat" onClick="tekan()">
-              <i class="fa fa-plus"> 
-              PROSES</i></button>
-            </td>
-          </tfoot>
-        </table>
 
-        <!-- <input type="hidden" name="id_penerimaan" value="<?php echo $id_penerimaan; ?>"> -->
-      <!-- <input type="hidden" name="id_pemesanan" value="<?php echo $id_pemesanan; ?>">
-      <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
-      <input type="hidden" name="status" value="<?php echo '1'; ?>"> -->
-      <!-- <div class="form-group">
-        <label class="col-sm-1 control-label"></label>
-        <div class="col-sm-3" align="left">
-          <a href="<?php echo base_url() ?>Penerimaan"><button type="button" name="batal" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-times"> BATAL</i></button></a>
-          <button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()"><i class="fa fa-plus"> UPDATE STOK</i></button>
-        </div>
-      </div> -->
-
+          <?php
+          if(!empty($data_tmp_retur)){
+            $dis_btn = 'disabled';
+         }else{
+            $dis_btn = '';
+        }
+        ?>
+        <td colspan="6" style="text-align: left;">
+          <button type="submit" <?php echo $dis_btn; ?> name="simpan" class="btn btn-success btn-sm btn-flat" onClick="tekan()">
+            <i class="fa fa-plus"> 
+            PROSES</i></button>
+          </td>
+        </tfoot>
+      </table>
     </div>
   </div>
 </div>
@@ -143,9 +139,8 @@
               <th>No</th>
               <th>Nama barang</th>
               <th>Harga Satuan</th>
-              <th>Jumlah Pesan</th>
-              <th>Sub Total</th>
-              <th>Retur</th>
+              <th>Jumlah Retur</th>
+              <th>Alasan</th>
             </tr>
           </thead>
           <tbody>
@@ -155,60 +150,29 @@
             foreach ($data_tmp_retur as $key => $value) { ?>
             <input type="hidden" name="id_detail" value="<?php echo $value->id_detail; ?>">
             <input type="hidden" name="id_barang[]" value="<?php echo $value->id_barang; ?>">
-            <input type="hidden" name="jumlah_pesan[]" value="<?php echo $value->jumlah_pesan; ?>">
+            <input type="hidden" name="jumlah_retur[]" value="<?php echo $value->jumlah_retur; ?>">
             <tr>  
               <td><?php echo $no; ?></td>
               <td><?php echo $value->nama_barang ?></td>
               <td>Rp.<?php echo number_format($value->harga_beli) ?></td>
-              <td><?php echo $value->jumlah_pesan ?> Pcs</td>
-              <td>Rp.<?php echo number_format($value->sub_total) ?></td>
-              <td><button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()"><i class="fa fa-plus"> SUMBIT</i></button></td>
+              <td><?php echo $value->jumlah_retur ?> </td>
+              <td><?php echo $value->keterangan ?> </td>
             </tr>
             <?php
-            $total_bayar = $total_bayar + $value->sub_total;
             $no++;
           } ?>
         </tbody>
-        <!-- <tfoot>
-          <td colspan="4" style="text-align: right;">Total Bayar</td>
-          <td colspan="2">Rp <?php echo number_format($total_bayar); ?> </td>
-        </tfoot> -->
-      </table>
-      <!-- <input type="hidden" name="id_penerimaan" value="<?php echo $id_penerimaan; ?>"> -->
-      <!-- <input type="hidden" name="id_pemesanan" value="<?php echo $id_pemesanan; ?>">
-      <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
-      <input type="hidden" name="status" value="<?php echo '1'; ?>"> -->
-      <!-- <div class="form-group">
-        <label class="col-sm-1 control-label"></label>
-        <div class="col-sm-3" align="left">
-          <a href="<?php echo base_url() ?>Penerimaan"><button type="button" name="batal" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-times"> BATAL</i></button></a>
-          <button type="submit" name="selesai" class="btn btn-success btn-sm btn-flat" onClick="tekan()"><i class="fa fa-plus"> UPDATE STOK</i></button>
-        </div>
-      </div> -->
-
-    </form>
+        <tfoot>
+          <td colspan="6" style="text-align: left;">
+            <button type="button" name="print" class="btn btn-default btn-sm btn-flat" onClick="">
+              <i class="fa fa-print">  
+              PRINT</i></button>
+            </td>
+          </tfoot>
+        </table>
+      </form>
+    </div>
   </div>
 </div>
 </div>
 </div>
-</div>
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url() ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    //this calculates values automatically 
-    sum();
-    $("#harga_beli, #jumlah_pesan").on("keydown keyup", function() {
-      sum();
-    });
-  });
-
-  function sum() {
-    var num1 = document.getElementById('harga_beli').value;
-    var num2 = document.getElementById('jumlah_pesan').value;
-    var result = parseInt(num1) * parseInt(num2);
-    if (!isNaN(result)) {
-      document.getElementById('sub_total').value = result;
-    }
-  }
-</script>

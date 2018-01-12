@@ -182,7 +182,7 @@ function cetak()
                     <?php echo $value->jumlah_pesan; ?> Pcs
                 </td>
                 <td style="text-align: right;">
-                    Rp. <?php echo number_format($value->sub_total); ?>
+                    Rp. <?php echo number_format($value->harga_beli * $value->jumlah_pesan); ?>
                 </td>
             </tr>
             <?php } ?>

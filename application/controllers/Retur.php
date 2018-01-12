@@ -69,11 +69,61 @@ class Retur extends CI_Controller {
 
 	}
 
-	public function insert_retur(){
-		echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";
+
+	public function cek_retur(){
+		$id_pemesanan =  $this->uri->segment(3);
+		$data_detail = $this->ReturModel->get_data_penerimaan($id_pemesanan);
+
+		$data_tmp_retur = $this->ReturModel->get_data_tmp_retur($id_pemesanan);
+
+		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
+			'head'	=> 'Retur',
+			'isi' 	=> 'transaksi/Retur/cek_retur',
+			'bread' => 'Form Retur',
+			'data_detail'	=> $data_detail,
+			'id_pemesanan'	=> $id_pemesanan,
+			'data_tmp_retur' => $data_tmp_retur
+		);
+		$this->load->view('layout/wrapper', $data);
 	}
+
+	public function insert_retur(){
+		
+		foreach ($_POST['id_barang'] as $key => $value) {
+
+			if(empty($_POST['alasan'][$key])){
+				
+			}else{
+				$data_retur = array(
+					'id_detail'		=> '',
+					'id_retur'		=> $this->input->post('id_retur'),
+					'id_pemesanan'	=> $this->input->post('id_pemesanan'),
+					'id_barang'		=> $value,
+					'jumlah_retur' 	=> $_POST['jumlah_retur'][$key],
+					'keterangan'	=> $_POST['alasan'][$key]
+				);
+				$insert_detail_retur = $this->ReturModel->insert_detail_retur($data_retur);
+				$update_status_barang = $this->db->query("UPDATE detail_pemesanan SET status_barang = '2'
+					WHERE id_barang = '$value'");
+			}
+		}
+
+		$data = array(
+			'id_retur' => $this->input->post('id_retur'),
+			'tgl_retur' => date('Y-m-d'),
+			'id_pemesanan' => $this->input->post('id_pemesanan')
+		);
+
+		$id_pemesanan = $this->input->post('id_pemesanan');
+		$insert_retur = $this->ReturModel->insert_retur($data);
+
+		$update = $this->db->query("UPDATE penerimaan SET status = '2' WHERE id_pemesanan = '$id_pemesanan'");
+
+		$this->session->set_flashdata('pesan','Retur Selesai');
+		redirect('Retur');
+	}
+
+
 
 	public function insert_penerimaan_final(){
 		$id_penerimaan = $this->input->post('id_penerimaan');
