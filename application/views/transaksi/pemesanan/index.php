@@ -39,12 +39,26 @@
           </div>
           <div class="col-xs-2">
             <label for="tgl_transaksi">Tanggal Pemesanan</label>
-            <input type="text" name="tgl_transaksi" readonly class="form-control" value="<?php echo date('d-m-Y h:i') ?>"/>
+            <input type="text" name="tgl_transaksi" readonly class="form-control" value="<?php echo date('d-F-Y h:i') ?>"/>
           </div>
           <div class="col-xs-2">
             <label for="id_user">Petugas</label>
             <input type="text" name="id_user" readonly class="form-control" value="<?php echo $this->session->userdata('nama_lengkap') ?>"/>
           </div>
+          <div class="col-xs-2">
+            <label for="id_suplier">Nama Suplier</label>
+            <select name="id_suplier" class="form-control">
+              <option value="0">Pilih Suplier</option>
+              <?php foreach($data_suplier as $ds){ ?>
+              <?php if($data_detail[0]->id_suplier == $ds->id_suplier){ ?>
+              <option value="<?php echo $ds->id_suplier ?>" selected><?php echo $ds->nama_suplier ?></option>
+              <?php }else{ ?>
+              <option value="<?php echo $ds->id_suplier ?>"><?php echo $ds->nama_suplier ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select>
+          </div>
+
         </div>
       </div>
     </div>
@@ -194,6 +208,7 @@
           <input type="hidden" name="id_pemesanan" value="<?php echo $hasilkode; ?>">
           <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
           <input type="hidden" name="total_bayar" value="<?php echo $total_bayar; ?>">
+          <input type="hidden" name="id_suplier" value="<?php echo @$data_detail[0]->id_suplier; ?>">
           <div class="form-group">
             <label class="col-sm-1 control-label"></label>
             <div class="col-sm-3" align="left">

@@ -21,6 +21,7 @@
                 <th class="text-center" >Kode Pemesanan</th>
                 <th class="text-center" >Tanggal Pemesanan</th>
                 <th class="text-center" >Petugas Pelayan</th>
+                <th class="text-center" >Nama Suplier</th>
                 <th class="text-center" >Total Bayar</th>
                 <th class="text-center" width="20%">Action</th>
               </tr>
@@ -34,6 +35,7 @@
               <td> <?php echo $value->id_pemesanan; ?> </td>
               <td> <?php echo $value->tgl_pemesanan; ?> </td>
               <td> <?php echo $value->nama_lengkap; ?> </td>
+              <td> <?php echo $value->nama_suplier; ?> </td>
               <td> <?php echo $value->total_bayar; ?> </td>
               <td> <center><a  href="<?php echo base_url() ?>Pemesanan/view_detail_pemesanan/<?php echo $value->id_pemesanan; ?>" title="View" ><i class="fa fa-eye"></i> View</a>
                 </center> </td>

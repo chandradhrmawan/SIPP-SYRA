@@ -30,6 +30,11 @@ class PemesananModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function get_data_suplier(){
+		$query = $this->db->query("SELECT * FROM m_suplier");
+		return $query->result();
+	}
+
 	public function get_data_pesan($id_pemesanan){
 		$query = $this->db->query("SELECT * FROM detail_pemesanan,m_barang 
 			WHERE detail_pemesanan.id_pemesanan = '$id_pemesanan'
@@ -40,12 +45,12 @@ class PemesananModel extends CI_Model {
 	public function delete_detail($id_detail){
 
 		$query_hapus = $this->db->query("DELETE FROM tmp_detail_pemesanan WHERE id_detail = '$id_detail'");
-			return TRUE;
+		return TRUE;
 	}
 
 	public function copy_table($id_pemesanan){
 		$this->db->query("INSERT INTO detail_pemesanan
-						  SELECT * FROM tmp_detail_pemesanan WHERE id_pemesanan = '$id_pemesanan'");
+			SELECT * FROM tmp_detail_pemesanan WHERE id_pemesanan = '$id_pemesanan'");
 		return TRUE;
 	}
 
@@ -60,29 +65,41 @@ class PemesananModel extends CI_Model {
 	}
 
 	public function get_data_pemesanan($id_pemesanan){
-		$query = $this->db->query("SELECT * FROM detail_pemesanan,m_barang,pemesanan 
+		$query = $this->db->query("SELECT * FROM detail_pemesanan,m_barang,pemesanan,m_suplier 
 			WHERE detail_pemesanan.id_pemesanan = '$id_pemesanan'
 			AND detail_pemesanan.id_pemesanan = pemesanan.id_pemesanan
-			AND detail_pemesanan.id_barang = m_barang.id_barang");
+			AND detail_pemesanan.id_barang = m_barang.id_barang
+			AND detail_pemesanan.id_suplier = m_suplier.id_suplier");
 		return $query->result();
 	}
 
 	public function get_riwayat_pemesanan(){
-		$query = $this->db->query("SELECT m_user.nama_lengkap, pemesanan.* FROM pemesanan,m_user WHERE pemesanan.id_user = m_user.id_user");
+		$query = $this->db->query("SELECT 
+			m_user.nama_lengkap, 
+			pemesanan.* ,
+			m_suplier.nama_suplier,
+			penerimaan.id_penerimaan,
+			penerimaan.status as status_penerimaan
+			FROM pemesanan
+			INNER JOIN m_user ON m_user.id_user = pemesanan.id_user
+			INNER JOIN m_suplier ON m_suplier.id_suplier = pemesanan.id_suplier
+			LEFT JOIN  penerimaan ON penerimaan.id_pemesanan = pemesanan.id_pemesanan");
 		return $query->result();
 	}
 
 	public function get_detail($id_pemesanan){
-		$query = $this->db->query("SELECT * FROM detail_pemesanan,m_barang 
+		$query = $this->db->query("SELECT detail_pemesanan.*, m_barang.nama_barang 
+			FROM detail_pemesanan,m_barang 
 			WHERE detail_pemesanan.id_pemesanan = '$id_pemesanan'
 			AND detail_pemesanan.id_barang = m_barang.id_barang");
 		return $query->result();
 	}
 
 	public function get_pemesanan($id_pemesanan){
-		$query = $this->db->query("SELECT * FROM pemesanan,m_user 
+		$query = $this->db->query("SELECT * FROM pemesanan,m_user,m_suplier 
 			WHERE pemesanan.id_pemesanan = '$id_pemesanan'
-			AND pemesanan.id_user = m_user.id_user");
+			AND pemesanan.id_user = m_user.id_user
+			AND pemesanan.id_suplier = m_suplier.id_suplier");
 		return $query->row_array();
 	}
 

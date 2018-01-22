@@ -49,6 +49,10 @@
             <label for="nama_pelanggan">Nama Pelanggan</label>
             <input type="text" name="nama_pelanggan" placeholder="Nama Pelanggan" value="<?php echo @$data_detail[0]->nama_pelanggan; ?>" class="form-control" />
           </div>
+          <div class="col-xs-2">
+            <label for="alamat_pelanggan">Alamat Pelanggan</label>
+            <input type="text" name="alamat_pelanggan" placeholder="Alamat Pelanggan" value="<?php echo @$data_detail[0]->alamat_pelanggan; ?>" class="form-control" />
+          </div>
         </div>
       </div>
     </div>
@@ -201,6 +205,7 @@
           <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
           <input type="hidden" name="total_bayar" value="<?php echo $total_bayar; ?>">
           <input type="hidden" name="nama_pelanggan" value="<?php echo @$data_detail[0]->nama_pelanggan; ?>">
+          <input type="hidden" name="alamat_pelanggan" value="<?php echo @$data_detail[0]->alamat_pelanggan; ?>">
           <div class="form-group">
             <label class="col-sm-1 control-label"></label>
             <div class="col-sm-3" align="left">

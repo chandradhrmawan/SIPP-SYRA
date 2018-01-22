@@ -25,6 +25,14 @@
             <th>Nama Petugas</th>
             <th><?php echo $data_transaksi['nama_lengkap'] ?></th>
           </tr>
+          <tr>
+            <th>Nama Pelanggan</th>
+            <th><?php echo $data_transaksi['nama_pelanggan'] ?></th>
+          </tr>
+          <tr>
+            <th>Alamat Pelanggan</th>
+            <th><?php echo $data_transaksi['alamat_pelanggan'] ?></th>
+          </tr>
           </table>
         </div>
         </div>
@@ -63,6 +71,7 @@
               </tbody>
             </table>
             <a href="<?php echo base_url()?>Penjualan/riwayat_penjualan"><button type="button" class="btn btn-flat btn-warning btn-sm"> <i class="fa fa-arrow-left"> Kembali </i> </button></a>
+             <a href="<?php echo base_url()?>Penjualan/print_invoice/<?php echo $data_transaksi['id_transaksi'] ?>"><button type="button" class="btn btn-flat btn-info btn-sm"> <i class="fa fa-print"> Print </i> </button></a>
           </div>
 </div>
 <!-- /.box-body -->

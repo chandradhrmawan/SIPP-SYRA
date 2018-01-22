@@ -8,9 +8,6 @@ class Laporan extends CI_Controller {
 		$this->CI =& get_instance();
 		$this->load->model("LaporanModel");
 		$this->login_user->cek_login();
-		//$this->load->library('m_pdf');
-		//$this->m_pdf->pdf->WriteHTML($html);
-		//$this->m_pdf->pdf->Output($pdfFilePath, "D");
 	}
 
 	public function index(){
@@ -36,7 +33,21 @@ class Laporan extends CI_Controller {
 		);
 		
 		$this->load->view('laporan/laporan_penjualan',$data);
-	
+
+	}
+
+	public function laporan_penjualan_detail(){
+		$dari   = $this->input->post('dari');
+		$sampai = $this->input->post('sampai');
+
+		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
+			'head'	=> 'Laporan Penjualan Detail',
+			'isi' 	=> 'laporan/laporan_penjualan_detail',
+			'bread' => 'Laporan / Laporan Penjualan Detail',
+			'hasil_query' => $this->LaporanModel->get_penjualan_detail($dari,$sampai)
+		);
+
+		$this->load->view('laporan/laporan_penjualan_detail',$data);
 	}
 
 	public function laporan_pemesanan(){
@@ -52,7 +63,7 @@ class Laporan extends CI_Controller {
 		);
 
 		$this->load->view('laporan/laporan_pemesanan',$data);
-	
+
 	}
 
 	public function laporan_penerimaan(){
@@ -68,6 +79,6 @@ class Laporan extends CI_Controller {
 		);
 
 		$this->load->view('laporan/laporan_penerimaan',$data);
-	
+
 	}
 }

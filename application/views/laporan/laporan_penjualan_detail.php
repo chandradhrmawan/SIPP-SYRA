@@ -7,14 +7,9 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/bootstrap/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/bootstrap/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/datatables/dataTables.bootstrap.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/AdminLTE.min.css">
+  
 
 </head>
 <style>
@@ -41,7 +36,7 @@
       <div class="row">
           <div class="col-md-10 col-md-offset-1">
               <tr>
-                  <td style="border:none; text-align: center;" colspan="10" align="center" ><font face="verdana" align="center"><strong> Laporan Data Pemesanan</strong></font></td>
+                  <td style="border:none; text-align: center;" colspan="10" align="center" ><font face="verdana" align="center"><strong> Laporan Data Penjualan Detail</strong></font></td>
               </tr>
               <tr>
                   <td style="border:none; text-align: center;" colspan="10" align="center" ><font face="verdana" align="center"><strong> Syra Hijab.</strong></font></td>
@@ -61,27 +56,27 @@
     <thead>
         <tr style="padding:15px">
             <th style="padding:15px">NO</th>
-            <th>ID PEMESANAN</th>
-            <th>TANGGAL PEMESANAN</th>
-            <th>PETUGAS PELAYAN</th>
-            <th>NAMA SUPLIER</th>
+            <th>ID TRANSAKSI</th>
+            <th>TANGGAL TRANSAKSI</th>
+            <th>NAMA BARANG</th>
+            <th>JUMLAH BELI</th>
             <th>SUB TOTAL</th>
         </tr>
     </thead>
-    <?php $no=1; $total_bayar = 0; foreach ($hasil_query as $key => $value) { ?>
+    <?php $no=1; 
+    $total_bayar = 0; 
+    foreach ($hasil_query as $key => $value) { ?>
     <tr>
-        <form name="fform" method="post" action="">
             <td style="padding:10px"><?php echo $no; ?></td>
-            <td><?php echo $value->id_pemesanan; ?></td>
-            <td><?php echo $value->tgl_pemesanan; ?></td>
-            <td><?php echo $value->nama_lengkap; ?></td>
-            <td><?php echo $value->nama_suplier; ?></td>
-            <td>Rp. <?php echo number_format($value->total_bayar); ?></td>
-        </form>
+            <td><?php echo $value->id_transaksi; ?></td>
+            <td><?php echo $value->tgl_transaksi; ?></td>
+            <td><?php echo $value->nama_barang; ?></td>
+            <td><?php echo $value->jumlah_beli; ?> Pcs</td>
+            <td>Rp. <?php echo number_format($value->sub_total); ?></td>
     </tr>
-    <?php $total_bayar = $total_bayar + $value->total_bayar; $no++; } ?>
+    <?php $total_bayar = $total_bayar + $value->sub_total; $no++; } ?>
     <tr>
-        <td style="padding:10px; text-align: right;" colspan="7">Total Pengeluaran : Rp. <?php echo number_format($total_bayar); ?></td>
+        <td style="padding:10px; text-align: right;" colspan="7">Total Pemasukan : Rp. <?php echo number_format($total_bayar); ?></td>
     </tr>
 </table>
 <div class="pull-right" align="right">
@@ -97,7 +92,7 @@
 
    ?>
 </div>
-<button id="button" onClick="cetak();">Print</button>
+<button id="button" class="btn btn-default btn-sm" onClick="cetak();">Print</button>
 </html>
 <script type="text/javascript">
     function cetak()

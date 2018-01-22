@@ -6,8 +6,25 @@ class LaporanModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function get_penjualan_detail($dari,$sampai){
+		$query = $this->db->query("SELECT detail_penjualan.id_transaksi,
+			detail_penjualan.jumlah_beli,
+			detail_penjualan.sub_total,
+			m_barang.nama_barang,
+			penjualan.nama_pelanggan,
+			penjualan.total_bayar,
+			penjualan.tgl_transaksi as tgl_transaksi
+			FROM
+			detail_penjualan
+			INNER JOIN penjualan ON penjualan.id_transaksi = detail_penjualan.id_transaksi
+			INNER JOIN m_barang ON detail_penjualan.id_barang = m_barang.id_barang
+			WHERE tgl_transaksi
+			BETWEEN '$dari' AND '$sampai'");
+		return $query->result();
+	}
+
 	public function get_pemesanan($dari,$sampai){
-		$query = $this->db->query("SELECT * FROM pemesanan,m_user WHERE pemesanan.tgl_pemesanan BETWEEN '$dari' AND '$sampai' AND pemesanan.id_user = m_user.id_user");
+		$query = $this->db->query("SELECT * FROM pemesanan,m_user,m_suplier WHERE pemesanan.tgl_pemesanan BETWEEN '$dari' AND '$sampai' AND pemesanan.id_user = m_user.id_user AND m_suplier.id_suplier = pemesanan.id_suplier");
 		return $query->result();
 	}
 

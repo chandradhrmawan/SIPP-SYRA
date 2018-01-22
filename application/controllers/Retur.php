@@ -22,6 +22,12 @@ class Retur extends CI_Controller {
 			'data_pemesanan' => $this->PemesananModel->get_riwayat_pemesanan(),
 			'data_retur' => $this->ReturModel->get_riwayat_penerimaan()
 		);
+
+		/*echo "<pre>";
+		// print_r($this->ReturModel->get_riwayat_penerimaan());
+		print_r($this->ReturModel->get_riwayat_penerimaan());
+		die();*/
+		
 		$this->load->view('layout/wrapper', $data);
 	}
 

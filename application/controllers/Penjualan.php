@@ -47,12 +47,12 @@ class Penjualan extends CI_Controller {
 		$id_barang = $this->input->post('id_barang');
 		$harga_jual = $this->input->post('harga_jual');
 		$sub_total = $harga_jual * $jumlah_beli;
-
 		$nama_pelanggan = $this->input->post("nama_pelanggan");
+		$alamat_pelanggan = $this->input->post("alamat_pelanggan");
 
 		
-		if(empty($nama_pelanggan)){
-			$this->session->set_flashdata('insert_gagal','Nama Pelanggan Belum Di Isi');
+		if(empty($nama_pelanggan) OR empty($alamat_pelanggan)){
+			$this->session->set_flashdata('insert_gagal','Nama / Alamat Pelanggan Belum Di Isi');
 			redirect('Penjualan');
 		}
 
@@ -77,7 +77,8 @@ class Penjualan extends CI_Controller {
 			'id_barang'			=> $id_barang,
 			'jumlah_beli'		=> $jumlah_beli,
 			'sub_total'			=> $sub_total,
-			'nama_pelanggan'	=> $this->input->post('nama_pelanggan')
+			'nama_pelanggan'	=> $this->input->post('nama_pelanggan'),
+			'alamat_pelanggan'	=> $this->input->post('alamat_pelanggan')
 		);
 
 		//cek isi
@@ -109,9 +110,10 @@ class Penjualan extends CI_Controller {
 		$id_transaksi = $this->input->post('id_transaksi');
 
 		$nama_pelanggan = $this->input->post('nama_pelanggan');
-
-		if(empty($nama_pelanggan)){
-			$this->session->set_flashdata('insert_gagal','Nama Pelanggan Belum Di Isi');
+		$alamat_pelanggan = $this->input->post("alamat_pelanggan");
+		
+		if(empty($nama_pelanggan) OR empty($alamat_pelanggan)){
+			$this->session->set_flashdata('insert_gagal','Nama / Alamat Pelanggan Belum Di Isi');
 			redirect('Penjualan');
 		}
 
@@ -120,7 +122,8 @@ class Penjualan extends CI_Controller {
 			'tgl_transaksi' 	=> date('Y-m-d H:i:s'),
 			'id_user'			=> $this->input->post('id_user'),
 			'total_bayar'		=> $this->input->post('total_bayar'),
-			'nama_pelanggan'	=> $this->input->post('nama_pelanggan')
+			'nama_pelanggan'	=> $nama_pelanggan,
+			'alamat_pelanggan'	=> $alamat_pelanggan
 		);
 
 		$copy_table = $this->PenjualanModel->copy_table($id_transaksi);

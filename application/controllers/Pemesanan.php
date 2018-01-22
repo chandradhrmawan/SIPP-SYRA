@@ -27,6 +27,7 @@ class Pemesanan extends CI_Controller {
 		}
 
 		$data_detail = $this->PemesananModel->get_detail_pemesanan($hasilkode);
+		$data_suplier = $this->PemesananModel->get_data_suplier();
 
 		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
 			'head'	=> 'Pemesanan',
@@ -34,7 +35,8 @@ class Pemesanan extends CI_Controller {
 			'bread' => 'Pemesanan',
 			'data_barang' => $this->PemesananModel->get_barang(),
 			'hasilkode'	=> $hasilkode,
-			'data_detail' => $data_detail
+			'data_detail' => $data_detail,
+			'data_suplier' => $data_suplier
 		);
 		$this->load->view('layout/wrapper', $data);
 	}
@@ -42,9 +44,18 @@ class Pemesanan extends CI_Controller {
 	public function insert_pemesanan(){
 
 		$id_pemesanan = $this->input->post('id_pemesanan');
-		
 		$jumlah_pesan = $this->input->post('jumlah_pesan');
 		$id_barang = $this->input->post('id_barang');
+		$id_suplier = $this->input->post('id_suplier');
+		$harga_beli = $this->input->post('harga_beli');
+		$sub_total = 0;
+		$sub_total = $harga_beli * $jumlah_pesan;
+
+
+		if($id_suplier == 0){
+			$this->session->set_flashdata('insert_gagal','Belum Pilih Suplier');
+			redirect('Pemesanan');
+		}
 
 		if($id_barang==0){
 			$this->session->set_flashdata('insert_gagal','Belum Pilih Barang');
@@ -56,8 +67,9 @@ class Pemesanan extends CI_Controller {
 			'id_pemesanan' 		=> $id_pemesanan,
 			'id_barang'			=> $id_barang,
 			'jumlah_pesan'		=> $jumlah_pesan,
-			'sub_total'			=> $this->input->post('sub_total'),
-			'status_barang'		=> '0'
+			'sub_total'			=> $sub_total,
+			'status_barang'		=> '0',
+			'id_suplier'		=> $id_suplier
 		);
 		$insert_detail = $this->PemesananModel->insert_pemesanan_detail($data_detail);
 
@@ -76,12 +88,19 @@ class Pemesanan extends CI_Controller {
 
 	public function insert_pemesanan_final(){
 		$id_pemesanan = $this->input->post('id_pemesanan');
+		$id_suplier = $this->input->post('id_suplier');
+
+		if($id_suplier == 0){
+			$this->session->set_flashdata('insert_gagal','Belum Pilih Suplier');
+			redirect('Pemesanan');
+		}
 		$data_pemesanan = array(
 			'id_pemesanan'		=> $this->input->post('id_pemesanan'),
 			'tgl_pemesanan' 	=> date('Y-m-d H:i:s'),
 			'id_user'			=> $this->input->post('id_user'),
 			'total_bayar'		=> $this->input->post('total_bayar'),
-			'status'			=> '0'
+			'status'			=> '0',
+			'id_suplier'		=> $id_suplier
 		);
 
 		$copy_table = $this->PemesananModel->copy_table($id_pemesanan);

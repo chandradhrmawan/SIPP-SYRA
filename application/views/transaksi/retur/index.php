@@ -23,10 +23,16 @@
                 <?php 
                 $no=1;
                 foreach ($data_retur as $key => $value) { 
-                  if($value->status == 1){
-                    $dis = '';
-                    $dis_print = 'disabled';
-                    $status = '<span class="label label-success">Utuh</span>';
+                  if($value->status_penerimaan == 1){
+                    if($value->status_pemesanan == 0){
+                      $dis = 'disabled';
+                      $dis_print = 'disabled';
+                      $status = '<span class="label label-warning">Terima Barang Terlebih Dahulu</span>';
+                    }else{
+                      $dis = '';
+                      $dis_print = 'disabled';
+                      $status = '<span class="label label-success">Utuh</span>';
+                    }
                   }else{
                     $status = '<span class="label label-danger">Sudah Di Retur</span>';
                     $dis = 'disabled';

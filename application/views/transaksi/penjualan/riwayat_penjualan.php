@@ -21,6 +21,7 @@
                 <th class="text-center" >No Invoice</th>
                 <th class="text-center" >Tanggal Transaksi</th>
                 <th class="text-center" >Petugas Pelayan</th>
+                <th class="text-center" >Nama Pelanggan</th>
                 <th class="text-center" >Total Bayar</th>
                 <th class="text-center" width="20%">Action</th>
               </tr>
@@ -32,9 +33,10 @@
               <tr>
               <td> <?php echo $no; ?> </td>
               <td> <?php echo $value->id_transaksi; ?> </td>
-              <td> <?php echo $value->tgl_transaksi; ?> </td>
+              <td> <?php echo date_format(date_create($value->tgl_transaksi),"d-F-Y H:i:s"); ?> </td>
               <td> <?php echo $value->nama_lengkap; ?> </td>
-              <td> <?php echo $value->total_bayar; ?> </td>
+              <td> <?php echo $value->nama_pelanggan; ?> </td>
+              <td>Rp. <?php echo number_format($value->total_bayar); ?> </td>
               <td> <center><a  href="<?php echo base_url() ?>Penjualan/view_detail_penjualan/<?php echo $value->id_transaksi; ?>" title="View" ><i class="fa fa-eye"></i> View</a>
                 </center> </td>
                 </tr>

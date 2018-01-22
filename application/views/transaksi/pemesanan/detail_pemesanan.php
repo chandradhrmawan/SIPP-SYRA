@@ -5,28 +5,32 @@
         <div class="box-header">
           <h3 class="box-title">Riwayat Pemesanan</h3>
         </div>  
-       <!-- /.box-header -->
-       <div class="box-body">
-        <div class="row">
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
 
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
            <div class="table-responsive">
-          <table class="table table-bordered" style="width:30%">
-          <tr>
-            <th>Id Transaksi</th>
-            <th><?php echo $data_pemesanan['id_pemesanan'] ?></th>
-          </tr>
-          <tr>
-            <th>Tanggal Transaksi</th>
-            <th><?php echo date('d-m-Y',strtotime($data_pemesanan['tgl_pemesanan'])) ?></th>
-          </tr>
-          <tr>
-            <th>Nama Petugas</th>
-            <th><?php echo $data_pemesanan['nama_lengkap'] ?></th>
-          </tr>
-          </table>
-        </div>
+            <table class="table table-bordered" style="width:30%">
+              <tr>
+                <th>Id Transaksi</th>
+                <th><?php echo $data_pemesanan['id_pemesanan'] ?></th>
+              </tr>
+              <tr>
+                <th>Tanggal Transaksi</th>
+                <th><?php echo date('d-m-Y',strtotime($data_pemesanan['tgl_pemesanan'])) ?></th>
+              </tr>
+              <tr>
+                <th>Nama Petugas</th>
+                <th><?php echo $data_pemesanan['nama_lengkap'] ?></th>
+              </tr>
+              <tr>
+                <th>Nama Suplier</th>
+                <th><?php echo $data_pemesanan['nama_suplier'] ?></th>
+              </tr>
+            </table>
+          </div>
         </div>
         <br>
         <div class="table-responsive">
@@ -46,28 +50,29 @@
               $total = 0;
               foreach ($data_detail_pesan as $key => $value) { ?>
               <tr>
-              <td> <?php echo $no; ?> </td>
-              <td> <?php echo $value->id_pemesanan; ?> </td>
-              <td> <?php echo $value->nama_barang; ?> </td>
-              <td> <?php echo $value->jumlah_pesan; ?> Pcs</td>
-              <td> Rp. <?php echo number_format($value->sub_total); ?> </td>
-                </tr>
-                <?php
-                 $total = $total + $value->sub_total;
-                 $no++; 
-               } ?>
-              <tr>
-                  <td colspan="4" style="text-align: right;">Total</td>
-                  <td>Rp. <?php echo number_format($total); ?></td>
+                <td> <?php echo $no; ?> </td>
+                <td> <?php echo $value->id_pemesanan; ?> </td>
+                <td> <?php echo $value->nama_barang; ?> </td>
+                <td> <?php echo $value->jumlah_pesan; ?> Pcs</td>
+                <td> Rp. <?php echo @number_format($value->sub_total); ?> </td>
               </tr>
-              </tbody>
-            </table>
-            <a href="<?php echo base_url()?>Pemesanan/riwayat_pemesanan"><button type="button" class="btn btn-flat btn-warning btn-sm"> <i class="fa fa-arrow-left"> Kembali </i> </button></a>
-          </div>
-</div>
-<!-- /.box-body -->
-</div> 
-<!-- /.box -->
+              <?php
+              $total = $total + $value->sub_total;
+              $no++; 
+            } ?>
+            <tr>
+              <td colspan="4" style="text-align: right;">Total</td>
+              <td>Rp. <?php echo number_format($total); ?></td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="<?php echo base_url()?>Pemesanan/riwayat_pemesanan"><button type="button" class="btn btn-flat btn-warning btn-sm"> <i class="fa fa-arrow-left"> Kembali </i> </button></a>
+        <a href="<?php echo base_url()?>Pemesanan/print_invoice/<?php echo $data_pemesanan['id_pemesanan'] ?>"><button type="button" class="btn btn-flat btn-info btn-sm"> <i class="fa fa-print"> Print </i> </button></a>
+      </div>
+    </div>
+    <!-- /.box-body -->
+  </div> 
+  <!-- /.box -->
 </div>
 <!-- /.col -->
 </div>

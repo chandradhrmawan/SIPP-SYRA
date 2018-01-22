@@ -135,8 +135,8 @@
         dataType: "JSON",
         success: function(data)
         {
-          $('[name="id_suplier"]').val(data.id_level);
-          $('[name="nama_suplier"]').val(data.nama_level);
+          $('[name="id_suplier"]').val(data.id_suplier);
+          $('[name="nama_suplier"]').val(data.nama_suplier);
           
 
           $('#modal_formView').modal('show'); // show bootstrap modal when complete loaded
@@ -174,7 +174,7 @@
         <form action="#" id="form">
           <div class="modal-body form">
             <div class="row col-md-12 center">
-            <input type="hidden" value="" name="id_level"/> 
+            <input type="hidden" value="" name="id_suplier"/> 
              <div class="form-group">
                 <label for="nama_suplier" class="form-control-label">Nama Suplier</label>
                 <input name="nama_suplier" placeholder="Nama Suplier" class="form-control" type="text" required="required">
