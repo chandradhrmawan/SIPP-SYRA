@@ -100,6 +100,8 @@ class Retur extends CI_Controller {
 			if(empty($_POST['alasan'][$key])){
 				
 			}else{
+				$id_barang = $value;
+				$jumlah_retur = $_POST['jumlah_retur'][$key];
 				$data_retur = array(
 					'id_detail'		=> '',
 					'id_retur'		=> $this->input->post('id_retur'),
@@ -111,6 +113,7 @@ class Retur extends CI_Controller {
 				$insert_detail_retur = $this->ReturModel->insert_detail_retur($data_retur);
 				$update_status_barang = $this->db->query("UPDATE detail_pemesanan SET status_barang = '2'
 					WHERE id_barang = '$value'");
+				$update_stok = $this->db->query("UPDATE m_barang SET stok = stok - '$jumlah_retur' WHERE id_barang = '$id_barang'");
 			}
 		}
 

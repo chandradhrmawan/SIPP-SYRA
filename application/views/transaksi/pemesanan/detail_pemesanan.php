@@ -67,7 +67,7 @@
           </tbody>
         </table>
         <a href="<?php echo base_url()?>Pemesanan/riwayat_pemesanan"><button type="button" class="btn btn-flat btn-warning btn-sm"> <i class="fa fa-arrow-left"> Kembali </i> </button></a>
-        <a href="<?php echo base_url()?>Pemesanan/print_invoice/<?php echo $data_pemesanan['id_pemesanan'] ?>"><button type="button" class="btn btn-flat btn-info btn-sm"> <i class="fa fa-print"> Print </i> </button></a>
+        <a target="__blank" href="<?php echo base_url()?>Pemesanan/print_invoice/<?php echo $data_pemesanan['id_pemesanan'] ?>"><button type="button" class="btn btn-flat btn-info btn-sm"> <i class="fa fa-print"> Print </i> </button></a>
       </div>
     </div>
     <!-- /.box-body -->

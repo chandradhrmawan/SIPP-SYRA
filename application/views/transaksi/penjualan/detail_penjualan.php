@@ -71,7 +71,7 @@
               </tbody>
             </table>
             <a href="<?php echo base_url()?>Penjualan/riwayat_penjualan"><button type="button" class="btn btn-flat btn-warning btn-sm"> <i class="fa fa-arrow-left"> Kembali </i> </button></a>
-             <a href="<?php echo base_url()?>Penjualan/print_invoice/<?php echo $data_transaksi['id_transaksi'] ?>"><button type="button" class="btn btn-flat btn-info btn-sm"> <i class="fa fa-print"> Print </i> </button></a>
+             <a target="__blank" href="<?php echo base_url()?>Penjualan/print_invoice/<?php echo $data_transaksi['id_transaksi'] ?>"><button type="button" class="btn btn-flat btn-info btn-sm"> <i class="fa fa-print"> Print </i> </button></a>
           </div>
 </div>
 <!-- /.box-body -->
