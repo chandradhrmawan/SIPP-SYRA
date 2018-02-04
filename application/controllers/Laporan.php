@@ -81,4 +81,34 @@ class Laporan extends CI_Controller {
 		$this->load->view('laporan/laporan_penerimaan',$data);
 
 	}
+
+	public function laporan_masuk(){
+
+		$dari   = $this->input->post('dari');
+		$sampai = $this->input->post('sampai');
+
+		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
+			'head'	=> 'Laporan Masuk',
+			'isi' 	=> 'laporan/laporan_masuk',
+			'bread' => 'Laporan / Laporan Masuk',
+			'hasil_query' => $this->LaporanModel->get_masuk($dari,$sampai)
+		);
+
+		$this->load->view('laporan/laporan_masuk',$data);
+
+	}
+
+	public function laporan_masuk_detail(){
+		$dari   = $this->input->post('dari');
+		$sampai = $this->input->post('sampai');
+
+		$data = array('title' 	=> 'Halaman Dashboard - SIPP Syra',
+			'head'	=> 'Laporan Masuk Detail',
+			'isi' 	=> 'laporan/laporan_masuk_detail',
+			'bread' => 'Laporan / Laporan Masuk Detail',
+			'hasil_query' => $this->LaporanModel->get_masuk_detail($dari,$sampai)
+		);
+
+		$this->load->view('laporan/laporan_masuk_detail',$data);
+	}
 }

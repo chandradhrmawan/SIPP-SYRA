@@ -117,5 +117,55 @@
   </div>
 </div>
 </form>
+<form class="form-horizontal" action="<?php echo base_url() ?>Laporan/laporan_masuk" method="post" enctype="multipart/form-data">
+  <div class="col-md-6">
+    <div class="box-body">
+      <div class="panel panel-default">
+       <div class="panel-heading">Laporan Masuk</div>
+       <div class="box-body">
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="dari">Dari</label>
+            <input type="date" name="dari" class="form-control"/>
+          </div>
+          <div class="col-md-3">
+            <label for="sampai">Sampai</label>
+            <input type="date" name="sampai" class="form-control"/>
+          </div>
+          <br>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-primary btn-flat" <?php echo $pemesanan; ?>><i class="fa fa-search"> Submit </i></button>        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<form class="form-horizontal" action="<?php echo base_url() ?>Laporan/laporan_masuk_detail" method="post" enctype="multipart/form-data">
+  <div class="col-md-6">
+    <div class="box-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">Laporan Detail Masuk</div>
+       <div class="box-body">
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="dari">Dari</label>
+            <input type="date" name="dari" class="form-control"/>
+          </div>
+          <div class="col-md-3">
+            <label for="sampai">Sampai</label>
+            <input type="date" name="sampai" class="form-control"/>
+          </div>
+          <br>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-primary btn-flat" <?php echo $pemesanan; ?>><i class="fa fa-search"> Submit </i></button>        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 </div>
 

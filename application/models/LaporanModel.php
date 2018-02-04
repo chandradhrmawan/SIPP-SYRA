@@ -33,5 +33,26 @@ class LaporanModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function get_masuk($dari,$sampai){
+		$query = $this->db->query("SELECT * FROM masuk,m_user WHERE masuk.tgl_masuk BETWEEN '$dari' AND '$sampai' AND masuk.id_user = m_user.id_user ");
+		return $query->result();
+	}
+
+	public function get_masuk_detail($dari,$sampai){
+		$query = $this->db->query("SELECT detail_masuk.id_masuk,
+			detail_masuk.jumlah_masuk,
+			detail_masuk.sub_total,
+			m_barang.nama_barang,
+			masuk.total_bayar,
+			masuk.tgl_masuk as tgl_masuk
+			FROM
+			detail_masuk
+			INNER JOIN masuk ON masuk.id_masuk = detail_masuk.id_masuk
+			INNER JOIN m_barang ON detail_masuk.id_barang = m_barang.id_barang
+			WHERE tgl_masuk
+			BETWEEN '$dari' AND '$sampai'");
+		return $query->result();
+	}
+
 }
 ?>

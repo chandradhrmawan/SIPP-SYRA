@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2018 at 09:44 PM
+-- Generation Time: Feb 04, 2018 at 12:02 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `sipp_syra`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_masuk`
+--
+
+CREATE TABLE IF NOT EXISTS `detail_masuk` (
+  `id_detail` int(255) DEFAULT NULL,
+  `id_masuk` varchar(255) DEFAULT NULL,
+  `id_barang` varchar(255) DEFAULT NULL,
+  `jumlah_masuk` int(11) DEFAULT NULL,
+  `sub_total` varchar(255) DEFAULT NULL,
+  `status_barang` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_masuk`
+--
+
+INSERT INTO `detail_masuk` (`id_detail`, `id_masuk`, `id_barang`, `jumlah_masuk`, `sub_total`, `status_barang`) VALUES
+(6, 'MS001040218', '6', 16, '640000', 0),
+(7, 'MS001040218', '10', 2, '80000', 0);
 
 -- --------------------------------------------------------
 
@@ -56,7 +79,7 @@ INSERT INTO `detail_pemesanan` (`id_detail`, `id_pemesanan`, `id_barang`, `jumla
 (3, 'PN008220118', '8', 35, '1400000', 2, '1'),
 (6, 'PN009220118', '7', 2, '', 2, '1'),
 (7, 'PN009220118', '9', 1, '40000', 2, '1'),
-(8, 'PN010220118', '6', 2, '80000', 0, '1'),
+(8, 'PN010220118', '6', 2, '80000', 2, '1'),
 (9, 'PN010220118', '8', 1, '', 2, '1'),
 (10, 'PN010220118', '10', 1, '40000', 0, '1'),
 (11, 'PN010220118', '19', 1, '', 0, '1'),
@@ -110,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `detail_retur` (
   `id_barang` varchar(25) NOT NULL,
   `jumlah_retur` int(11) NOT NULL,
   `keterangan` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_retur`
@@ -128,7 +151,29 @@ INSERT INTO `detail_retur` (`id_detail`, `id_pemesanan`, `id_retur`, `id_barang`
 (17, 'PN007220118', 'RT007220118', '7', 3, 'kurang'),
 (18, 'PN008220118', 'RT008220118', '8', 30, 'Rusak Parah Ya'),
 (19, 'PN009220118', 'RT009220118', '7', 2, 'Rusak PN009220118 2'),
-(20, 'PN009220118', 'RT009220118', '9', 1, 'Rusak PN009220118 1');
+(20, 'PN009220118', 'RT009220118', '9', 1, 'Rusak PN009220118 1'),
+(21, 'PN010220118', 'RT010230118', '6', 2, 'Salah Warnanya');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `masuk`
+--
+
+CREATE TABLE IF NOT EXISTS `masuk` (
+  `id_masuk` varchar(255) NOT NULL,
+  `tgl_masuk` datetime DEFAULT NULL,
+  `id_user` varchar(255) DEFAULT NULL,
+  `total_bayar` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `masuk`
+--
+
+INSERT INTO `masuk` (`id_masuk`, `tgl_masuk`, `id_user`, `total_bayar`, `status`) VALUES
+('MS001040218', '2018-02-04 11:18:53', '7', '720000', 0);
 
 -- --------------------------------------------------------
 
@@ -146,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `m_barang` (
   `harga_jual` varchar(100) DEFAULT NULL,
   `harga_beli` varchar(100) DEFAULT NULL,
   `direktori` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `m_barang`
@@ -154,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `m_barang` (
 
 INSERT INTO `m_barang` (`id_barang`, `nama_barang`, `id_kategori`, `id_warna`, `stok`, `keterangan`, `harga_jual`, `harga_beli`, `direktori`) VALUES
 (3, 'kerudung rabani', 3, 1, '1245', 'Isi Deskripsi Barang', '2323', '11123', 'P006.jpg'),
-(6, 'Alisha Plain Square Maroon', 1, 1, '32', 'Bahan : maxmara silk\r\nukuran :110x110cm', '80000', '40000', '1512642174742.jpg'),
+(6, 'Alisha Plain Square Maroon', 1, 1, '40', 'Bahan : maxmara silk\r\nukuran :110x110cm', '80000', '40000', '1512642174742.jpg'),
 (7, 'Alisha Plain Square Navy', 1, 2, '32', 'Bahan : maxmara silk \r\nukuran :110x110cm', '80000', '40000', '1512642179958.jpg'),
 (8, 'Alisha Plain Square Black', 1, 3, '103', 'Bahan : maxmara silk \r\nukuran :110x110cm', '80000', '40000', '1512642169861.jpg'),
 (9, 'Alisha Plain Square Salmon', 1, 5, '30', 'Bahan : maxmara silk \r\nukuran :110x110cm', '80000', '40000', '1512642185313.jpg'),
@@ -351,7 +396,7 @@ INSERT INTO `penerimaan` (`id_penerimaan`, `id_pemesanan`, `tgl_penerimaan`, `id
 ('PM009220118', 'PN008220118', '2018-01-22 15:33:28', '7', '2'),
 ('PM010220118', 'PN008220118', '2018-01-22 15:33:38', '7', '2'),
 ('PM011220118', 'PN009220118', '2018-01-22 21:02:02', '7', '2'),
-('PM012220118', 'PN010220118', '2018-01-22 21:06:36', '7', '1');
+('PM012220118', 'PN010220118', '2018-01-22 21:06:36', '7', '2');
 
 -- --------------------------------------------------------
 
@@ -405,7 +450,23 @@ INSERT INTO `retur` (`id_retur`, `tgl_retur`, `id_pemesanan`) VALUES
 ('RT006210118', '2018-01-21', 'PN006210118'),
 ('RT007220118', '2018-01-22', 'PN007220118'),
 ('RT008220118', '2018-01-22', 'PN008220118'),
-('RT009220118', '2018-01-22', 'PN009220118');
+('RT009220118', '2018-01-22', 'PN009220118'),
+('RT010230118', '2018-01-23', 'PN010220118');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tmp_detail_masuk`
+--
+
+CREATE TABLE IF NOT EXISTS `tmp_detail_masuk` (
+  `id_detail` int(255) NOT NULL,
+  `id_masuk` varchar(255) DEFAULT NULL,
+  `id_barang` varchar(255) DEFAULT NULL,
+  `jumlah_masuk` int(11) DEFAULT NULL,
+  `sub_total` varchar(255) DEFAULT NULL,
+  `status_barang` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -421,7 +482,7 @@ CREATE TABLE IF NOT EXISTS `tmp_detail_pemesanan` (
   `sub_total` varchar(255) DEFAULT NULL,
   `status_barang` int(11) DEFAULT NULL,
   `id_suplier` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -437,7 +498,7 @@ CREATE TABLE IF NOT EXISTS `tmp_detail_penjualan` (
   `sub_total` int(255) DEFAULT NULL,
   `nama_pelanggan` varchar(255) DEFAULT NULL,
   `alamat_pelanggan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -462,6 +523,12 @@ CREATE TABLE IF NOT EXISTS `tmp_detail_retur` (
 --
 ALTER TABLE `detail_retur`
   ADD PRIMARY KEY (`id_detail`);
+
+--
+-- Indexes for table `masuk`
+--
+ALTER TABLE `masuk`
+  ADD PRIMARY KEY (`id_masuk`);
 
 --
 -- Indexes for table `m_barang`
@@ -524,6 +591,12 @@ ALTER TABLE `retur`
   ADD PRIMARY KEY (`id_retur`);
 
 --
+-- Indexes for table `tmp_detail_masuk`
+--
+ALTER TABLE `tmp_detail_masuk`
+  ADD PRIMARY KEY (`id_detail`);
+
+--
 -- Indexes for table `tmp_detail_pemesanan`
 --
 ALTER TABLE `tmp_detail_pemesanan`
@@ -549,12 +622,12 @@ ALTER TABLE `tmp_detail_retur`
 -- AUTO_INCREMENT for table `detail_retur`
 --
 ALTER TABLE `detail_retur`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `m_barang`
 --
 ALTER TABLE `m_barang`
-  MODIFY `id_barang` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id_barang` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `m_kategori`
 --
@@ -581,15 +654,20 @@ ALTER TABLE `m_user`
 ALTER TABLE `m_warna`
   MODIFY `id_warna` int(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
+-- AUTO_INCREMENT for table `tmp_detail_masuk`
+--
+ALTER TABLE `tmp_detail_masuk`
+  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT for table `tmp_detail_pemesanan`
 --
 ALTER TABLE `tmp_detail_pemesanan`
-  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tmp_detail_penjualan`
 --
 ALTER TABLE `tmp_detail_penjualan`
-  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id_detail` int(255) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tmp_detail_retur`
 --
