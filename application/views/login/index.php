@@ -49,7 +49,7 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-      <p class="login-box-msg">Silahkan Login</p>
+      <p class="login-box-msg">Silahkan Masuk</p>
 
       <form action="<?php echo base_url(); ?>login" method="post">
         <div class="form-group has-feedback">
